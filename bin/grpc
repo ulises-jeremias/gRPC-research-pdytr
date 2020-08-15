@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020 ulises-jeremias, WilliamGaggiotti
+## Licensed under GPL v3.0
+##
+##     @script.name [OPTION] ARGUMENTS...
+##
+## Options:
+##          --app=APP_NAME            Application name to be executed.
+##                                    Values: simp, ftp, ...
+##                                    ftp by default
+##
+##          --root                    Execute container as root
+##          --build                   Build docker image
+##          --log-file=LOG_FILE_PATH  Logs file path, is /tmp/pdytr.txt by default.
+##
+## Usage:
+## 
+##     @script.name --app=ftp --client --grpc         [Example running ftp client using gRPC]
+##     @script.name --app=ftp --server --grpc         [Example running ftp server using gRPC]
+
+ROOT=$(dirname $0)
+
+source "${ROOT}/../util/opts/opts.sh" || exit
+source "${ROOT}/../util/logs.sh" || exit
+
+#==========================================
+# Default argument values and preprocessing
+#==========================================
+log_file=${log_file:-"/tmp/pdytr.txt"}
+app=${app:-"ftp"}
+
+[ ! -f "${log_file}" ] && touch ${log_file}
+
+# app source dir
+APP_DIR=$(realpath "${ROOT}/../src/gRPC/${app}")
+
+# docker volume dirs
+DOCKER_PROJECT_MOUNT="/go/${app}"
+DOCKER_PROTO_DIR="${DOCKER_PROJECT_MOUNT}/proto"
+DOCKER_CLIENT_DIR="${DOCKER_PROJECT_MOUNT}/client"
+DOCKER_SERVER_DIR="${DOCKER_PROJECT_MOUNT}/server"
+
+if [[ ! -n "${root}" ]]; then
+    user_flag="-u $(id -u):$(id -g)"
+fi
+
+# creates docker image if it doesn't exists
+docker_ini() {
+    if ! type -p docker > /dev/null; then
+        log_failed "Docker is not installed in this system" ${log_file}
+        exit -1
+    fi
+
+    IMAGE_NAME="grpc-util:latest"
+    IMAGE_NAME_ARRAY=(${IMAGE_NAME//:/ })
+
+    if [[ -n "${build}" ]] || [[ "$(docker images ${IMAGE_NAME_ARRAY[0]} | grep ${IMAGE_NAME_ARRAY[1]} 2> /dev/null)" = "" ]]; then
+        docker build . -f ./docker/Dockerfile -t "${IMAGE_NAME}"
+    fi
+}
+
+# run
+docker_run() {
+    docker run --rm -it ${user_flag} -v "${APP_DIR}":"${DOCKER_PROJECT_MOUNT}" -w "${DOCKER_PROJECT_MOUNT}" "${IMAGE_NAME}"
+    exit
+}
+
+docker_ini
+docker_run
+
+# Help shown by default
+[[ -z "$documentation" ]] && parse_documentation
+echo "$documentation"
