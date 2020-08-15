@@ -1,7 +1,7 @@
 package main
 
 import (
-	"../proto"
+	".."
 	"log"
 
 	"golang.org/x/net/context"
@@ -14,8 +14,8 @@ func main() {
 		panic(err)
 	}
 
-	c := proto.NewOperationsClient(conn)
-	req := &proto.Request{A: int64(25), B: int64(10)}
+	c := simp.NewOperationsClient(conn)
+	req := &simp.Request{A: int64(25), B: int64(10)}
 
 	suma, err := c.Add(context.Background(), req)
 	if err != nil {
