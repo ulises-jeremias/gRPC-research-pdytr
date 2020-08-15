@@ -26,20 +26,13 @@ Once the docker container is running you will be able to run the following examp
 
 ## Simple example
 
-> Generate `proto` file
-
 ```sh
-pdytr-docker /go/simp ~> protoc --go_out=plugins=grpc:. ./simp.proto
-```
+# generate proto file
+~> protoc --go_out=plugins=grpc:. ./simp.proto
 
-> Run server
+# execute server in background
+~> go run ./server/main.go &
 
-```sh
-pdytr-docker /go/simp ~> go run ./server/main.go
-```
-
-> Run client
-
-```sh
-pdytr-docker /go/simp ~> go run ./client/main.go
+# execute client
+~> go run ./client/main.go
 ```
