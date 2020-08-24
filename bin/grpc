@@ -62,7 +62,7 @@ docker_ini() {
 
 # run
 docker_run() {
-    docker run --rm -it ${user_flag} -v "${APP_DIR}":"${DOCKER_PROJECT_MOUNT}" -w "${DOCKER_PROJECT_MOUNT}" "${IMAGE_NAME}"
+    docker run --rm -it --net=host ${user_flag} -v "${APP_DIR}":"${DOCKER_PROJECT_MOUNT}" -w "${DOCKER_PROJECT_MOUNT}" "${IMAGE_NAME}"
     exit
 }
 
