@@ -11,14 +11,6 @@ message Response {
     int64 result = 1;
 }
 
-message Name {
-    string name = 1;
-}
-
-message Num {
-    int64 num = 1;
-}
-
 service Operations {
     rpc Add(Request) returns (Response);
     rpc Sub(Request) returns (Response);   
