@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package user_lookup;
+
+
+message Username {
+    string name = 1;
+}
+
+message User_id {
+    string num = 1;
+}
+
+service Operations {
+    rpc Byname(Username) returns (User_id);
+    rpc Bynum(User_id) returns (Username);   
+}
