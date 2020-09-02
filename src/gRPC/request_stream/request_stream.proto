@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package request_stream;
+
+
+message Request {
+    int64 num = 1;
+}
+
+message Response {
+    int64 result = 1;
+}
+
+service Operations {
+    rpc Summation(stream Request) returns (Response);  
+}
