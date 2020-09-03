@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package response_stream;
+
+
+message Request {
+    int64 num = 1;
+}
+
+message Response {
+    int64 oneMultiple = 1;
+}
+
+service Operations {
+    rpc Multiple(Request) returns (stream Response);  
+}
