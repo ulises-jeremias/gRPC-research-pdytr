@@ -37,7 +37,7 @@ func main() {
 			break
 		}
 		if err != nil {
-			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
+			log.Fatalf("%v",err)
 		}
 		fmt.Printf("%d -> ",reply.OneMultiple)
 	}
