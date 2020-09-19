@@ -2,9 +2,9 @@ package main
 
 import (
 	".."
-	"log"
 	"fmt"
 	"io"
+	"log"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -37,8 +37,8 @@ func main() {
 			break
 		}
 		if err != nil {
-			log.Fatalf("%v",err)
+			log.Fatalf("%v", err)
 		}
-		fmt.Printf("%d -> ",reply.OneMultiple)
+		fmt.Printf("%d -> ", reply.OneMultiple)
 	}
-	}
+}

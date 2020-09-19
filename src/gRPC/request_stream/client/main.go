@@ -2,8 +2,8 @@ package main
 
 import (
 	".."
-	"log"
 	"fmt"
+	"log"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -33,7 +33,7 @@ func main() {
 		if err := stream.Send(&req); err != nil {
 			log.Fatalf("can not send %v", err)
 		}
-		fmt.Printf("Faltan enviar %d numeros mas al servidor \n", (10-i))
+		fmt.Printf("Faltan enviar %d numeros mas al servidor \n", (10 - i))
 	}
 
 	reply, err := stream.CloseAndRecv()
@@ -42,4 +42,4 @@ func main() {
 	}
 	log.Printf("Respuesta del servidor: \n Suma de los 10 numeros: %d ", reply.Result)
 
-	}
+}

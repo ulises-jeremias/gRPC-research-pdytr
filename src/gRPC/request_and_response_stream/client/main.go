@@ -2,9 +2,9 @@ package main
 
 import (
 	".."
-	"log"
 	"fmt"
 	"io"
+	"log"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -35,7 +35,7 @@ func main() {
 		fmt.Printf("Ingrese un numero. (0 para finalizar)\n\n")
 		fmt.Scanf("%d \n", &num)
 
-		if num == 0{
+		if num == 0 {
 			ok = false
 			//closing sending stream
 			stream.CloseSend()
@@ -52,19 +52,19 @@ func main() {
 		//recive
 		reply, err := stream.Recv()
 		if err != nil {
-			log.Fatalf("%v",err)
+			log.Fatalf("%v", err)
 		}
-		fmt.Printf("El maximo actual del servidor es: %d \n",reply.Result)
-		
+		fmt.Printf("El maximo actual del servidor es: %d \n", reply.Result)
+
 	}
 	//closing receive stream
 	reply, err := stream.Recv()
-	_ = reply 
-			if err == io.EOF {
-				close(done)
-				return
-			}
-			if err != nil {
-				log.Fatalf("can not receive %v", err)
-			}
+	_ = reply
+	if err == io.EOF {
+		close(done)
+		return
+	}
+	if err != nil {
+		log.Fatalf("can not receive %v", err)
+	}
 }

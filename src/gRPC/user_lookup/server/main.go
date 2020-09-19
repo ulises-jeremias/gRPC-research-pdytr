@@ -30,11 +30,11 @@ func main() {
 func (s *server) Byname(ctx context.Context, username *user_lookup.Username) (*user_lookup.UserId, error) {
 	name := username.GetName()
 
-	user_found, err  := user.Lookup(name)
+	user_found, err := user.Lookup(name)
 	if err != nil {
 		panic(err)
 	}
-	
+
 	return &user_lookup.UserId{Num: user_found.Uid}, nil
 }
 

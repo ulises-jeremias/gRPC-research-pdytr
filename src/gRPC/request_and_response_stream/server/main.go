@@ -2,9 +2,9 @@ package main
 
 import (
 	".."
-	"net"
 	"io"
 	"log"
+	"net"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -44,7 +44,7 @@ func (s *server) Max(stream request_and_response_stream.Operations_MaxServer) er
 			log.Printf("receive error %v", err)
 			return err
 		}
-		
+
 		// continue if number reveived from stream
 		// less than max
 		if req.Num > max {
