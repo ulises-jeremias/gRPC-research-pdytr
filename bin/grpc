@@ -14,10 +14,6 @@
 ##          --build                   Build docker image
 ##          --log-file=LOG_FILE_PATH  Logs file path, is /tmp/pdytr.txt by default.
 ##
-## Usage:
-## 
-##     @script.name --app=ftp --client --grpc         [Example running ftp client using gRPC]
-##     @script.name --app=ftp --server --grpc         [Example running ftp server using gRPC]
 
 ROOT=$(dirname $0)
 
