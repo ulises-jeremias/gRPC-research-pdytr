@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package ftp;
+
+message ReadRequest {
+    string name = 1;
+    uint64 pos = 2;
+    uint64 bytes = 3;
+}
+
+message WriteRequest {
+    string name = 1;
+    string mode = 2;
+    string data = 3;
+    uint64 checksum = 4;
+}
+
+message ListRequest {
+    string name = 1;
+    bool all = 2;
+}
+
+message ReadResponse {
+    string name = 1;
+    string data = 2;
+    bool continue_reading = 3;
+}
+
+message WriteResponse {
+    bool ok = 1;
+    string err = 2;
+}
+
+message ListResponse {
+    bool ok = 1;
+    string err = 2;
+}
+
+service Operations {
+    rpc Read(ReadRequest) returns (ReadResponse);
+    rpc Write(WriteRequest) returns (WriteResponse);
+    rpc List(ListRequest) returns (ListResponse);
+}
