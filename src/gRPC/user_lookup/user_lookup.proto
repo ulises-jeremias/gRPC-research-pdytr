@@ -12,6 +12,6 @@ message User_id {
 }
 
 service Operations {
-    rpc Byname(Username) returns (User_id);
-    rpc Bynum(User_id) returns (Username);   
+    rpc ByUsername(Username) returns (User_id);
+    rpc ById(User_id) returns (Username);   
 }

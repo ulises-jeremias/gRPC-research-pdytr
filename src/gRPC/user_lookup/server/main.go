@@ -27,7 +27,7 @@ func main() {
 	}
 }
 
-func (s *server) Byname(ctx context.Context, username *user_lookup.Username) (*user_lookup.UserId, error) {
+func (s *server) ByUsername(ctx context.Context, username *user_lookup.Username) (*user_lookup.UserId, error) {
 	name := username.GetName()
 
 	user_found, err := user.Lookup(name)
@@ -38,7 +38,7 @@ func (s *server) Byname(ctx context.Context, username *user_lookup.Username) (*u
 	return &user_lookup.UserId{Num: user_found.Uid}, nil
 }
 
-func (s *server) Bynum(ctx context.Context, user_id *user_lookup.UserId) (*user_lookup.Username, error) {
+func (s *server) ById(ctx context.Context, user_id *user_lookup.UserId) (*user_lookup.Username, error) {
 	num := user_id.GetNum()
 
 	user_found, err := user.LookupId(num)
