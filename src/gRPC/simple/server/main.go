@@ -1,7 +1,6 @@
 package main
 
 import (
-	".."
 	"context"
 	"net"
 
@@ -18,7 +17,7 @@ func main() {
 	}
 
 	srv := grpc.NewServer()
-	simp.RegisterOperationsServer(srv, &server{})
+	simple.RegisterOperationsServer(srv, &server{})
 	reflection.Register(srv)
 
 	if e := srv.Serve(listener); e != nil {
@@ -26,18 +25,18 @@ func main() {
 	}
 }
 
-func (s *server) Add(ctx context.Context, request *simp.Request) (*simp.Response, error) {
+func (s *server) Add(ctx context.Context, request *simple.Request) (*simple.Response, error) {
 	a, b := request.GetA(), request.GetB()
 
 	result := a + b
 
-	return &simp.Response{Result: result}, nil
+	return &simple.Response{Result: result}, nil
 }
 
-func (s *server) Sub(ctx context.Context, request *simp.Request) (*simp.Response, error) {
+func (s *server) Sub(ctx context.Context, request *simple.Request) (*simple.Response, error) {
 	a, b := request.GetA(), request.GetB()
 
 	result := a - b
 
-	return &simp.Response{Result: result}, nil
+	return &simple.Response{Result: result}, nil
 }

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package simp;
+package simple;
 
 message Request {
     int64 a = 1;
