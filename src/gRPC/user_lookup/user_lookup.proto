@@ -7,7 +7,7 @@ message Username {
     string name = 1;
 }
 
-message UserId {
+message UserID {
     string num = 1;
 }
 
