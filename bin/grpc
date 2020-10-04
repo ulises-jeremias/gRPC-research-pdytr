@@ -38,7 +38,7 @@ DOCKER_CLIENT_DIR="${DOCKER_PROJECT_MOUNT}/client"
 DOCKER_SERVER_DIR="${DOCKER_PROJECT_MOUNT}/server"
 
 if [[ ! -n "${root}" ]]; then
-    user_flag="-u $(id -u):$(id -g)"
+    USER_FLAG="-u $(id -u):$(id -g)"
 fi
 
 # creates docker image if it doesn't exists
@@ -48,17 +48,30 @@ docker_ini() {
         exit -1
     fi
 
-    IMAGE_NAME="grpc-util:latest"
+    if type -p md5 > /dev/null; then
+        lockSum=$(md5 -r docker/grpc.Dockerfile | awk '{ print $1 }')
+    else
+        lockSum=$(md5sum -t docker/grpc.Dockerfile | awk '{ print $1 }')
+    fi
+
+    IMAGE_NAME="grpc-util-${lockSum}:latest"
     IMAGE_NAME_ARRAY=(${IMAGE_NAME//:/ })
 
     if [[ -n "${build}" ]] || [[ "$(docker images ${IMAGE_NAME_ARRAY[0]} | grep ${IMAGE_NAME_ARRAY[1]} 2> /dev/null)" = "" ]]; then
-        docker build . -f ./docker/Dockerfile -t "${IMAGE_NAME}"
+        docker build -f ./docker/grpc.Dockerfile \
+            -t "${IMAGE_NAME}" \
+            --build-arg USER=${USER} \
+            .
     fi
 }
 
 # run
 docker_run() {
-    docker run --rm -it --net=host ${user_flag} -v "${APP_DIR}":"${DOCKER_PROJECT_MOUNT}" -w "${DOCKER_PROJECT_MOUNT}" "${IMAGE_NAME}"
+    docker run --rm -it --net=host \
+        -v "${APP_DIR}":"${DOCKER_PROJECT_MOUNT}" \
+        -w "${DOCKER_PROJECT_MOUNT}" \
+        ${USER_FLAG} \
+        "${IMAGE_NAME}"
     exit
 }
 

@@ -5,7 +5,7 @@
 We provide a docker environment to execute the different applications. To start the docker container execute the following command,
 
 ```sh
-$ ./bin/grpc --app <app> [--build] [--root]
+$ ./bin/grpc --app=<app> [--build] [--root]
 ```
 
 where,
