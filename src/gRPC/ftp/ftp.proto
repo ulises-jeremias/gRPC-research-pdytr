@@ -26,10 +26,7 @@ message ReadResponse {
     bool continue_reading = 3;
 }
 
-message WriteResponse {
-    bool ok = 1;
-    string err = 2;
-}
+message WriteResponse {}
 
 message ListResponse {
     bool ok = 1;
