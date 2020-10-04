@@ -29,13 +29,10 @@ app=${app:-"ftp"}
 [ ! -f "${log_file}" ] && touch ${log_file}
 
 # app source dir
-APP_DIR=$(realpath "${ROOT}/../src/gRPC/${app}")
+APP_DIR=$(realpath "${ROOT}/../src/RPC/${app}")
 
 # docker volume dirs
-DOCKER_PROJECT_MOUNT="/go/${app}"
-DOCKER_PROTO_DIR="${DOCKER_PROJECT_MOUNT}/proto"
-DOCKER_CLIENT_DIR="${DOCKER_PROJECT_MOUNT}/client"
-DOCKER_SERVER_DIR="${DOCKER_PROJECT_MOUNT}/server"
+DOCKER_PROJECT_MOUNT="/rpc/${app}"
 
 if [[ ! -n "${root}" ]]; then
     USER_FLAG="-u $(id -u):$(id -g)"
@@ -49,16 +46,16 @@ docker_ini() {
     fi
 
     if type -p md5 > /dev/null; then
-        lockSum=$(md5 -r docker/grpc.Dockerfile | awk '{ print $1 }')
+        lockSum=$(md5 -r docker/rpc.Dockerfile | awk '{ print $1 }')
     else
-        lockSum=$(md5sum -t docker/grpc.Dockerfile | awk '{ print $1 }')
+        lockSum=$(md5sum -t docker/rpc.Dockerfile | awk '{ print $1 }')
     fi
 
-    IMAGE_NAME="grpc-util-${lockSum}:latest"
+    IMAGE_NAME="rpc-util-${lockSum}:latest"
     IMAGE_NAME_ARRAY=(${IMAGE_NAME//:/ })
 
     if [[ -n "${build}" ]] || [[ "$(docker images ${IMAGE_NAME_ARRAY[0]} | grep ${IMAGE_NAME_ARRAY[1]} 2> /dev/null)" = "" ]]; then
-        docker build -f ./docker/grpc.Dockerfile \
+        docker build -f ./docker/rpc.Dockerfile \
             -t "${IMAGE_NAME}" \
             --build-arg USER=${USER} \
             .

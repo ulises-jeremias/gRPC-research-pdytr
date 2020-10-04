@@ -6,7 +6,6 @@ all: ftp.h client server
 client: ftpclient.o ftp_clnt.o ftp_xdr.o util.o command.o
 	gcc -o client ftpclient.o ftp_clnt.o ftp_xdr.o util.o command.o -lnsl -I./ -Wall
 
-
 server: ftpservice.o ftp_svc.o ftp_xdr.o util.o
 	gcc -o server ftpservice.o ftp_svc.o ftp_xdr.o util.o -lrpcsvc -lnsl -I./ -Wall
 

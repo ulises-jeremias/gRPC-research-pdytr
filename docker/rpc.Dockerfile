@@ -1,10 +1,10 @@
-ARG GOLANG_VERSION=latest
+ARG UBUNTU_VERSION=latest
 
-FROM golang:${GOLANG_VERSION} as base
-# GOLANG_VERSION is specified again because the FROM directive resets ARGs
+FROM ubuntu:${UBUNTU_VERSION} as base
+# UBUNTU_VERSION is specified again because the FROM directive resets ARGs
 # (but their default value is retained if set previously)
 
-ARG GOLANG_VERSION
+ARG UBUNTU_VERSION
 ARG USER=test
 
 # Needed for string substitution
@@ -19,6 +19,8 @@ RUN apt-get update \
         neovim \
         apt-utils \
         locales \
+        rpcbind \
+        make \
     && rm -rf /tmp/* /var/tmp/*
 
 ENV EDITOR nvim
@@ -29,19 +31,6 @@ RUN useradd -m ${USER} \
     && echo "${USER} ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/${USER} \
     && usermod -a -G sudo ${USER} \
     && rm -rf /home/${USER}/.bashrc
-
-# Install grpc
-RUN go get -u google.golang.org/grpc \
-    && go get -u github.com/golang/protobuf/protoc-gen-go
-
-# Install protoc and zip system library
-ARG PROTOC_VERSION=3.7.0
-ENV PROTOC_FOLDER=protoc-${PROTOC_VERSION}-linux-x86_64
-RUN apt-get update && apt-get install -y zip \
-    && cd /tmp \
-    && wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_FOLDER}.zip \
-    && unzip ${PROTOC_FOLDER}.zip \
-    && install -Dm755 bin/protoc /usr/bin/protoc
 
 # Set correct locale
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment \
