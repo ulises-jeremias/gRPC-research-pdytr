@@ -1,10 +1,11 @@
 package main
 
 import (
-	".."
 	"fmt"
 	"io"
 	"log"
+
+	response_stream ".."
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"

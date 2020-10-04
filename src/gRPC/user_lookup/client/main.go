@@ -1,8 +1,9 @@
 package main
 
 import (
-	".."
 	"log"
+
+	user_lookup ".."
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -17,15 +18,14 @@ func main() {
 	c := user_lookup.NewOperationsClient(conn)
 	username := &user_lookup.Username{Name: "root"}
 
-	user_id, err := c.ByUsername(context.Background(), username)
+	var userID, err = c.ByUsername(context.Background(), username)
 	if err != nil {
 		log.Fatalf("Error when calling ByUsername: %s", err)
 	}
-	log.Printf("El ID de root es: %s", user_id.Num)
+	log.Printf("El ID de root es: %s", userID.Num)
 
-	//nose por que no me deja reutilizar las varialbes, no te enojes uli :(
-	user_id2 := &user_lookup.UserId{Num: "0"}
-	username2, err := c.ById(context.Background(), user_id2)
+	userID = &user_lookup.UserID{Num: "0"}
+	username2, err := c.ById(context.Background(), userID)
 	if err != nil {
 		log.Fatalf("Error when calling Sub: %s", err)
 	}

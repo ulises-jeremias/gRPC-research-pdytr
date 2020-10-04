@@ -1,8 +1,9 @@
 package main
 
 import (
-	".."
 	"net"
+
+	response_stream ".."
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"

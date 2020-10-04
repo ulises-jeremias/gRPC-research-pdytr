@@ -1,10 +1,11 @@
 package main
 
 import (
-	".."
 	"fmt"
 	"io"
 	"log"
+
+	request_and_response_stream ".."
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -57,9 +58,9 @@ func main() {
 		fmt.Printf("El maximo actual del servidor es: %d \n", reply.Result)
 
 	}
-	//closing receive stream
-	reply, err := stream.Recv()
-	_ = reply
+
+	// closing receive stream
+	_, err := stream.Recv()
 	if err == io.EOF {
 		close(done)
 		return

@@ -1,10 +1,11 @@
 package main
 
 import (
-	".."
 	"context"
 	"net"
 	"os/user"
+
+	user_lookup ".."
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -27,24 +28,24 @@ func main() {
 	}
 }
 
-func (s *server) ByUsername(ctx context.Context, username *user_lookup.Username) (*user_lookup.UserId, error) {
+func (s *server) ByUsername(ctx context.Context, username *user_lookup.Username) (*user_lookup.UserID, error) {
 	name := username.GetName()
 
-	user_found, err := user.Lookup(name)
+	userFound, err := user.Lookup(name)
 	if err != nil {
 		panic(err)
 	}
 
-	return &user_lookup.UserId{Num: user_found.Uid}, nil
+	return &user_lookup.UserID{Num: userFound.Uid}, nil
 }
 
-func (s *server) ById(ctx context.Context, user_id *user_lookup.UserId) (*user_lookup.Username, error) {
-	num := user_id.GetNum()
+func (s *server) ByID(ctx context.Context, userID *user_lookup.UserID) (*user_lookup.Username, error) {
+	num := userID.GetNum()
 
-	user_found, err := user.LookupId(num)
+	userFound, err := user.LookupId(num)
 	if err != nil {
 		panic(err)
 	}
 
-	return &user_lookup.Username{Name: user_found.Username}, nil
+	return &user_lookup.Username{Name: userFound.Username}, nil
 }

@@ -1,9 +1,10 @@
 package main
 
 import (
-	".."
 	"fmt"
 	"log"
+
+	request_stream ".."
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -23,7 +24,7 @@ func main() {
 		log.Fatalf("openn stream error %v", err)
 	}
 
-	//sending 10 numbers
+	// sending 10 numbers
 	var num int64
 	for i := 1; i <= 10; i++ {
 		//Requesting data on screen

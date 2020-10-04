@@ -7,11 +7,11 @@ message Username {
     string name = 1;
 }
 
-message User_id {
+message UserId {
     string num = 1;
 }
 
 service Operations {
-    rpc ByUsername(Username) returns (User_id);
-    rpc ById(User_id) returns (Username);   
+    rpc ByUsername(Username) returns (UserID);
+    rpc ByID(UserID) returns (Username);   
 }

@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	simple ".."
+
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
