@@ -17,7 +17,7 @@ message WriteRequest {
 
 message ListRequest {
     string name = 1;
-    bool all = 2;
+    bool list = 2;
 }
 
 message ReadResponse {
@@ -29,8 +29,7 @@ message ReadResponse {
 message WriteResponse {}
 
 message ListResponse {
-    bool ok = 1;
-    string err = 2;
+    string paths = 3;
 }
 
 service Operations {

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	ftp ".."
 
 	"bufio"
@@ -10,6 +12,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"strings"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -163,5 +166,38 @@ func (s *server) Write(req *ftp_stream.WriteRequest, stream ftp_stream.Operation
 			log.Printf("Error %v", err)
 		}
 		log.Printf("Wrote chunk of size = %d for file %s", dataLen, name)
+	}
+}
+
+func fileHandler(files *[]string) filepath.WalkFunc {
+	return func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			log.Fatal(err)
+		}
+		*files = append(*files, path.Name())
+		return nil
+	}
+}
+
+func (s *server) List(req *ftp_stream.ListRequest, stream ftp_stream.Operations_WriteServer) error {
+	var files []string
+
+	root := "store"
+	err := filepath.Walk(root, fileHandler(&files))
+	if err != nil {
+		panic(err)
+	}
+
+	sep := '\t'
+	if req.list {
+		sep = '\n'
+	}
+
+	// send response to stream
+	resp := ftp_stream.ListResponse{
+		paths: strings.Join(files, sep) + '\n'
+	}
+	if err := stream.Send(&resp); err != nil {
+		log.Printf("Error %v", err)
 	}
 }
