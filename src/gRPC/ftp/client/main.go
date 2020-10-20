@@ -28,12 +28,6 @@ type struct HandlerArgs {
 }
 
 func main() {
-	conn, err := grpc.Dial("localhost:4444", grpc.WithInsecure())
-	if err != nil {
-		panic(err)
-	}
-
-	client := request_and_response_stream.NewOperationsClient(conn)
 
 	verbose := flag.Bool("verbose", false, "")
 	src := flag.String("src", "", "")
@@ -70,8 +64,23 @@ func main() {
 		os.Exit()
 	}
 
+	conn, err := grpc.Dial("localhost:4444", grpc.WithInsecure())
+	if err != nil {
+		panic(err)
+	}
+
+	client := ftp.NewOperationsClient(conn)
+
 	command_name := os.Args[1]
 	if command, ok := commands[command]; ok {
-			
+		args := HandlerArgs{
+			verbose: verbose,
+			bytes: bytes,
+			initial_pos: initial_pos,
+			src: src,
+			dest: dest
+		}
+
+		command(client, args)
 	}
 }
