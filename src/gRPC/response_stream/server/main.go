@@ -26,10 +26,10 @@ func main() {
 	}
 }
 
-func (s *server) Multiple(request *response_stream.Request, stream response_stream.Operations_MultipleServer) error {
+func (s *server) Multiple(req *response_stream.Request, stream response_stream.Operations_MultipleServer) error {
 	var aux int64 = 0
 	for i := 1; i <= 10; i++ {
-		aux += request.Num
+		aux += req.Num
 		resp := response_stream.Response{OneMultiple: aux}
 		if err := stream.Send(&resp); err != nil {
 			return err

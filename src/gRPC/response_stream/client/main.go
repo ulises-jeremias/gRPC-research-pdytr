@@ -21,14 +21,14 @@ func main() {
 
 	//Requesting data on screen
 	var num int64
-	fmt.Printf("Ingrese un numero y el servidor enviara los primeros 10 multiplos del mismo \n")
-	fmt.Scanf("%d \n", &num)
+	fmt.Println("Enter a number and the server will send the first 10 multiples of the same")
+	fmt.Scanf("%d\n", &num)
 
 	//Create a stream
 	req := &response_stream.Request{Num: num}
 	stream, err := client.Multiple(context.Background(), req)
 	if err != nil {
-		log.Fatalf("openn stream error %v", err)
+		log.Fatalf("Open stream error %v", err)
 	}
 
 	//Receiving data from server

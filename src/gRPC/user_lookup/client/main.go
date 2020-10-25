@@ -22,12 +22,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error when calling ByUsername: %s", err)
 	}
-	log.Printf("El ID de root es: %s", userID.Num)
+	log.Printf("Root user ID: %s", userID.Num)
 
 	userID = &user_lookup.UserID{Num: "0"}
 	username, err = c.ByID(context.Background(), userID)
 	if err != nil {
 		log.Fatalf("Error when calling Sub: %s", err)
 	}
-	log.Printf("El username del Id 0 es: %s", username.Name)
+	log.Printf("Username of user with ID 0: %s", username.Name)
 }

@@ -26,36 +26,36 @@ func main() {
 		log.Fatalf("openn stream error %v", err)
 	}
 
-	//sending numbers
+	// sending numbers
 	var num int64
 	var ok bool = true
-	fmt.Printf("Empezando una transmisión bidireccional con el servidor......\n\n")
-	fmt.Printf("Ingrese numeros, el servidor ira comparando los numeros que le lleguen con su maximo local, si el numero enviado es mayor al maximo local, entonces se actualizara el mismo y se notificara al cliente\n\n")
+	fmt.Prinln("Starting a bidirection conection with the server")
+	fmt.Prinln("Enter numbers, the server will compare the numbers that reach you with your local maximum, if the number sent is greater than the local maximum, then it will be updated and the client will be notified")
 	for ok {
-		//Requesting data on screen
-		fmt.Printf("Ingrese un numero. (0 para finalizar)\n\n")
+		// Requesting data to the user
+		fmt.Prinln("Enter a number (0 to finish)")
 		fmt.Scanf("%d \n", &num)
 
 		if num == 0 {
 			ok = false
 			//closing sending stream
 			stream.CloseSend()
-			fmt.Printf("Conexion terminada \n")
+			fmt.Prinln("Conection closed")
 			continue
 		}
 
-		//send
+		// send request data
 		req := request_and_response_stream.Request{Num: num}
 		if err := stream.Send(&req); err != nil {
 			log.Fatalf("can not send %v", err)
 		}
 
-		//recive
+		// receive res data
 		reply, err := stream.Recv()
 		if err != nil {
 			log.Fatalf("%v", err)
 		}
-		fmt.Printf("El maximo actual del servidor es: %d \n", reply.Result)
+		fmt.Printf("Actual max is: %d \n", reply.Result)
 
 	}
 
@@ -66,6 +66,6 @@ func main() {
 		return
 	}
 	if err != nil {
-		log.Fatalf("can not receive %v", err)
+		log.Fatalf("Can not receive %v", err)
 	}
 }

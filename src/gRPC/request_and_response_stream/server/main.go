@@ -47,12 +47,12 @@ func (s *server) Max(stream request_and_response_stream.Operations_MaxServer) er
 		}
 
 		// continue if number reveived from stream
-		// less than max
+		// is less than max
 		if req.Num > max {
 			max = req.Num
 		}
 
-		//send to stream
+		// send to stream
 		resp := request_and_response_stream.Response{Result: max}
 		if err := stream.Send(&resp); err != nil {
 			log.Printf("send error %v", err)
