@@ -4,15 +4,15 @@ package ftp;
 
 message ReadRequest {
     string name = 1;
-    uint64 pos = 2;
-    uint64 bytes = 3;
+    int64 pos = 2;
+    int64 bytes = 3;
 }
 
 message WriteRequest {
     string name = 1;
-    string mode = 2;
     string data = 3;
-    uint64 checksum = 4;
+    int32 mode = 2;
+    int64 checksum = 4;
 }
 
 message ListRequest {
@@ -33,7 +33,7 @@ message ListResponse {
 }
 
 service Operations {
-    rpc Read(ReadRequest) returns (ReadResponse);
-    rpc Write(WriteRequest) returns (WriteResponse);
+    rpc Read(stream ReadRequest) returns (stream ReadResponse);
+    rpc Write(stream WriteRequest) returns (stream WriteResponse);
     rpc List(ListRequest) returns (ListResponse);
 }

@@ -3,65 +3,38 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io"
-	"log"
 	"os"
 
 	ftp ".."
+	command "./command"
 
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
-type struct Command {
-	name string
-	description string
-	handle func(args HandlerArgs)
-}
-
-type struct HandlerArgs {
-	verbose bool
-	bytes int64
-	initial_pos int64
-	src string
-	dest string
+func usage() {
+	fmt.Fprintf(os.Stderr, "Usage: %s [flags] OPERATION\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "\nOperations:\n\n")
+	for _, c := range command.Commands {
+		fmt.Fprintf(os.Stderr, "  %s: %s\n", c.Name, c.Description)
+	}
+	fmt.Fprintf(os.Stderr, "\nFlags:\n\n")
+	flag.PrintDefaults()
+	os.Exit(2)
 }
 
 func main() {
-
-	verbose := flag.Bool("verbose", false, "")
+	verbose := flag.Bool("v", false, "")
 	src := flag.String("src", "", "")
-	dest := flag.String("dest", "", "")
-	initial_pos := flag.Int64("init-pos", 0, "")
-	bytes := flag.Int64("bytes", "-1", "")
-	list := flag.Bool("list", false, "")
+	dest := flag.String("dest", "tmp1", "")
+	initialPos := flag.Int64("i", 0, "")
+	bytes := flag.Int64("b", -1, "")
+	list := flag.Bool("l", false, "")
 
+	flag.Usage = usage
 	flag.Parse()
 
-	commands := map[string]HandlerArgs{
-		"write": {
-			name = "write",
-			description = "Add a file from --src to --dest",
-			handle = ftp_write,
-		},
-		"read": {
-			name = "read",
-			description = "Store a file from --src to --dest",
-			handle = ftp_read,
-		},
-		"list": {
-			name = "list",
-			description = "List all files from --src",
-			handle = ftp_list,
-		}
-	}
-
 	if len(os.Args) < 2 {
-		log.Printf("Usage: %s\n", argv[0])
-		for k, c := range commands {
-				log.Printf("\t- %s: %s\n", c.name, c.description)
-		}
-		os.Exit()
+		usage()
 	}
 
 	conn, err := grpc.Dial("localhost:4444", grpc.WithInsecure())
@@ -71,16 +44,17 @@ func main() {
 
 	client := ftp.NewOperationsClient(conn)
 
-	command_name := os.Args[1]
-	if command, ok := commands[command]; ok {
-		args := HandlerArgs{
-			verbose: verbose,
-			bytes: bytes,
-			initial_pos: initial_pos,
-			src: src,
-			dest: dest
+	commandName := os.Args[len(os.Args)-1]
+	if c, ok := command.Commands[commandName]; ok {
+		args := command.HandlerArgs{
+			Verbose:    *verbose,
+			Bytes:      *bytes,
+			List:       *list,
+			InitialPos: *initialPos,
+			Src:        *src,
+			Dest:       *dest,
 		}
 
-		command(client, args)
+		c.Handle(client, args)
 	}
 }

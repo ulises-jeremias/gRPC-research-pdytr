@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"context"
 
 	ftp ".."
 
@@ -27,7 +27,7 @@ func main() {
 	}
 
 	srv := grpc.NewServer()
-	ftp_stream.RegisterOperationsServer(srv, &server{})
+	ftp.RegisterOperationsServer(srv, &server{})
 	reflection.Register(srv)
 
 	if e := srv.Serve(listener); e != nil {
@@ -35,7 +35,7 @@ func main() {
 	}
 }
 
-func (s *server) Read(req *ftp_stream.ReadRequest, stream ftp_stream.Operations_ReadServer) error {
+func (s *server) Read(stream ftp.Operations_ReadServer) error {
 
 	for {
 		// receive data from stream
@@ -54,22 +54,22 @@ func (s *server) Read(req *ftp_stream.ReadRequest, stream ftp_stream.Operations_
 		bytes := req.Bytes
 		filePath := path.Join("store", req.Name)
 
-		log.Println("Path: %s", filePath)
+		log.Printf("Path: %s", filePath)
 
 		// limit bytes value to save on chunck
 		// with size under 1025
-		if bytes > 1024 {
+		if bytes > 1024 || bytes < 0 {
 			bytes = 1024
 		}
 
 		// open file
 		f, err := os.Open(filePath)
 		if err != nil {
-			log.Println("Error to read [file=%v]: %v", filePath, err.Error())
+			log.Printf("Error to read [file=%v]: %v", filePath, err.Error())
 			return err
 		}
-		if _, err := input.Seek(req.Pos, 0); err != nil {
-			log.Println("Error to seek position %d for file [file=%v]: %v", req.Pos, filePath, err.Error())
+		if _, err := f.Seek(req.Pos, 0); err != nil {
+			log.Printf("Error to seek position %d for file [file=%v]: %v", req.Pos, filePath, err.Error())
 			return err
 		}
 
@@ -82,32 +82,34 @@ func (s *server) Read(req *ftp_stream.ReadRequest, stream ftp_stream.Operations_
 		if n == 0 {
 			if err == nil {
 				// ignore
-			}
-			if err == io.EOF {
+			} else if err == io.EOF {
 				isEOF = true
+			} else {
+				log.Printf("Error %v", err)
+				return err
 			}
-			log.Println("Error %v", err)
-			return err
 		}
+
+		defer f.Close()
 
 		// save buffer data
 		dataVal := string(buf)
 		dataLen := int64(len(buf))
 
 		// send response to stream
-		resp := ftp_stream.ReadResponse{
+		res := ftp.ReadResponse{
 			Data:            dataVal,
-			Name:            name,
+			Name:            req.Name,
 			ContinueReading: !isEOF,
 		}
-		if err := stream.Send(&resp); err != nil {
+		if err := stream.Send(&res); err != nil {
 			log.Printf("Error %v", err)
 		}
-		log.Printf("Sent chunk of size = %d for file %s", dataLen, name)
+		log.Printf("Sent chunk of size = %d for file %s", dataLen, req.Name)
 	}
 }
 
-func (s *server) Write(req *ftp_stream.WriteRequest, stream ftp_stream.Operations_WriteServer) error {
+func (s *server) Write(stream ftp.Operations_WriteServer) error {
 
 	for {
 		// receive data from stream
@@ -126,78 +128,69 @@ func (s *server) Write(req *ftp_stream.WriteRequest, stream ftp_stream.Operation
 		dirPath := filepath.Dir(filePath)
 
 		// save buffer data
-		dataLen := len(req.data)
-		buf := make([]byte, 0, 1026)
-		copy(buf[:], req.data)
+		dataLen := len(req.Data)
+		buf := []byte(req.Data)
+		buf = buf[:dataLen]
 
-		log.Println("Path: %s", filePath)
+		log.Printf("Path: %s", filePath)
 
 		// ensure that dir exists with perm os.ModePerm: 0777
-		_ := os.MkdirAll(dirPath, os.ModePerm)
+		_ = os.MkdirAll(dirPath, os.ModePerm)
 
 		// open file
-		f, err := os.Open(filePath, req.Mode)
+		f, err := os.OpenFile(filePath, int(req.Mode)|os.O_CREATE, os.ModePerm)
 		if err != nil {
-			log.Println("Error to open [file=%v]: %v", filePath, err.Error())
+			log.Printf("Error to open [file=%v]: %v", filePath, err.Error())
 			return err
 		}
 
 		// check checksum
 		checksum := ftp.Djb2(buf)
-		if incomeChecksum != checksum {
-			log.Println("Error in checksum!!\nOriginal: %d\nOwn: %d\n", req.Checksum, checksum)
+		if req.Checksum != checksum {
+			log.Printf("Error in checksum!!\nOriginal: %d\nOwn: %d\n", req.Checksum, checksum)
 			return err
 		}
 
 		// write file content using buffer
-		w := bufio.NewWriter(f)
-		n, err := w.Write(buf[:cap(buf)])
+		n, err := f.Write(buf)
 		if n == 0 {
 			if err == nil {
 				// ignore
 			}
-			log.Println("Error %v", err)
+			log.Printf("Error %v", err)
 			return err
 		}
 
+		defer f.Close()
+
 		// send response to stream
-		resp := ftp_stream.WriteResponse{}
-		if err := stream.Send(&resp); err != nil {
+		res := ftp.WriteResponse{}
+		if err := stream.Send(&res); err != nil {
 			log.Printf("Error %v", err)
 		}
-		log.Printf("Wrote chunk of size = %d for file %s", dataLen, name)
+		log.Printf("Wrote chunk of size = %d for file %s", dataLen, req.Name)
 	}
 }
 
-func fileHandler(files *[]string) filepath.WalkFunc {
-	return func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			log.Fatal(err)
-		}
-		*files = append(*files, path.Name())
-		return nil
-	}
-}
+func (s *server) List(ctx context.Context, req *ftp.ListRequest) (res *ftp.ListResponse, err error) {
 
-func (s *server) List(req *ftp_stream.ListRequest, stream ftp_stream.Operations_WriteServer) error {
 	var files []string
 
 	root := "store"
-	err := filepath.Walk(root, fileHandler(&files))
+	err = filepath.Walk(root, ftp.FileHandler(&files))
 	if err != nil {
-		panic(err)
+		log.Printf("Error %v", err)
+		return nil, err
 	}
 
-	sep := '\t'
-	if req.list {
-		sep = '\n'
+	sep := "\t"
+	if req.List {
+		sep = "\n"
 	}
 
 	// send response to stream
-	resp := ftp_stream.ListResponse{
-		paths: strings.Join(files, sep) + '\n'
+	res = &ftp.ListResponse{
+		Paths: strings.Join(files, sep) + "\n",
 	}
-	if err := stream.Send(&resp); err != nil {
-		log.Printf("Error %v", err)
-	}
+	return res, nil
 }
