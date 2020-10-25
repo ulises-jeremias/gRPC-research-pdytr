@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-// Djb2 function
+// Djb2 function that returns a hash for a given byte array
 func Djb2(bytes []byte) int64 {
 	var hash int64 = 5381
 
@@ -20,6 +20,7 @@ func Djb2(bytes []byte) int64 {
 	return hash
 }
 
+// FileHandler returns a function to walk thru different files
 func FileHandler(files *[]string) filepath.WalkFunc {
 	return func(path string, info os.FileInfo, err error) error {
 		if err != nil {
