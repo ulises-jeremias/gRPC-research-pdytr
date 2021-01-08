@@ -198,16 +198,10 @@ func ftpWrite(client ftp.OperationsClient, args HandlerArgs) {
 		if err := stream.Send(&req); err != nil {
 			log.Fatalf("can not send %v", err)
 		}
-
-		// receive data
-		_, err = stream.Recv()
-		if err != nil {
-			log.Fatalf("%v", err)
-		}
 	}
 
 	// closing receive stream
-	_, err = stream.Recv()
+	_, err = stream.CloseAndRecv()
 	if err == io.EOF {
 		close(done)
 		return

@@ -165,7 +165,7 @@ func (s *server) Write(stream ftp.Operations_WriteServer) error {
 
 		// send response to stream
 		res := ftp.WriteResponse{}
-		if err := stream.Send(&res); err != nil {
+		if err := stream.SendAndClose(&res); err != nil {
 			log.Printf("Error %v", err)
 		}
 		log.Printf("Wrote chunk of size = %d for file %s", dataLen, req.Name)
