@@ -12,6 +12,8 @@ source "${ROOT}/../util/logs.sh" || exit 1
 
 GRPC_APPS=( simple user_lookup request_stream response_stream ftp )
 
+mkdir "${ROOT}"/../results
+
 for app in ${GRPC_APPS[*]}; do
     "${ROOT}"/grpc --app="${app}" --root -d
 
@@ -21,6 +23,7 @@ for app in ${GRPC_APPS[*]}; do
     # show logs
     cat "${ROOT}"/../src/gRPC/"${app}"/logs.txt
 
+    # copy logs into results dir
     cp -f "${ROOT}"/../src/gRPC/"${app}"/logs.txt "${ROOT}"/../results/grpc-"${app}".log
 
     # stop container

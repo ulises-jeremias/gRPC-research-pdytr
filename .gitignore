@@ -19,4 +19,3 @@
 *.o
 
 /results/*
-!/results/.gitkeep
