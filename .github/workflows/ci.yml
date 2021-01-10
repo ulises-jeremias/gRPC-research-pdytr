@@ -11,7 +11,7 @@ jobs:
     - name: Execute tests
       run: ./bin/test
     - name: Download results for gRPC
-      uses: actions/download-artifact@v2
+      uses: actions/upload-artifact@v2
       with:
         name: grpc-results
         path: ./results
