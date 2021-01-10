@@ -37,6 +37,7 @@ go run ./server/main.go &
 
 # wait until server is running
 describe "Waitting for server"
+sleep 1
 log_success "Server running at port 4444\n"
 
 # execute client with user number
