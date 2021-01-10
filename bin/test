@@ -18,9 +18,6 @@ for app in ${GRPC_APPS[*]}; do
     # execute test inside docker container
     docker exec grpc /go/"${app}"/test
 
-    # show logs
-    cat "${ROOT}"/../src/gRPC/"${app}"/logs.txt
-
     # stop container
     docker stop grpc
 done
