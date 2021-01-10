@@ -31,7 +31,7 @@ test_read() {
         (time go run ./client/main.go --src "${src}" --dest "${dest}" read) &>> "${log_file}"
         echo >> "${log_file}"
 
-        if [[ -z "$(diff "./store/${src}" "${dest}")" ]]; then
+        if diff "./store/${src}" "${dest}" &> /dev/null; then
             log_success "There is no diff between ${src} and ${dest}\n\n" "read(${src}, ${dest})" "${log_file}"
         else
             log_failed "${src} is different compared to ${dest}\n\n" "read(${src}, ${dest})" "${log_file}"
@@ -48,7 +48,7 @@ test_write() {
         (time go run ./client/main.go --src "${src}" --dest "${dest}" write) &>> "${log_file}"
         echo >> "${log_file}"
 
-        if [[ -z "$(diff "${src}" "./store/${dest}")" ]]; then
+        if diff "${src}" "./store/${dest}" &> /dev/null; then
             log_success "There is no diff between ${src} and ${dest}\n\n" "write(${src}, ${dest})" "${log_file}"
         else
             log_failed "${src} is different compared to ${dest}\n\n" "write(${src}, ${dest})" "${log_file}"
