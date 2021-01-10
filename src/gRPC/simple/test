@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020 ulises-jeremias, WilliamGaggiotti
+## Licensed under GPL v3.0
+## IMPORTANT: This script must be executed inside the docker container created for gRPC
+##
+##     @script.name [OPTION] ARGUMENTS...
+##
+## Options:
+##          --log-file=LOG_FILE_PATH  Logs file path, is /tmp/logs.txt by default.
+
+ROOT=$(dirname "$0")
+
+source "${ROOT}/util/logs.sh" || exit 1
+
+#==========================================
+# Default argument values and preprocessing
+#==========================================
+log_file=${log_file:-"${ROOT}/logs.txt"}
+
+[ ! -f "${log_file}" ] && touch "${log_file}"
+
+pushd "${ROOT}" || exit 1
+
+test_simple() {
+    for _ in $(seq 1 "${1}"); do
+        (time go run ./client/main.go) &>> "${log_file}"
+        echo >> "${log_file}"
+    done
+}
+
+# generate proto file
+protoc --go_out=plugins=grpc:. ./simp.proto
+
+# execute server in background
+go run ./server/main.go &
+
+# wait until server is running
+describe "Waitting for server"
+log_success "Server running at port 4444\n"
+
+# execute client with user number
+test_simple 10
