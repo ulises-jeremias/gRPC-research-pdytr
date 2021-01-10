@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Copyright (C) 2020 ulises-jeremias, WilliamGaggiotti
-## Licensed under GPL v3.0
+## Licensed under MIT
 ## IMPORTANT: This script must be executed inside the docker container created for gRPC
 ##
 ##     @script.name [OPTION] ARGUMENTS...
@@ -20,7 +20,7 @@ log_file=${log_file:-"${ROOT}/logs.txt"}
 
 [ ! -f "${log_file}" ] && touch "${log_file}"
 
-pushd "${ROOT}" || exit 1
+cd "${ROOT}" || exit 1
 
 test_read() {
     src="$1"

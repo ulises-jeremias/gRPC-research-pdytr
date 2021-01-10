@@ -4,6 +4,6 @@ ROOT=$(dirname $0)
 
 source "${ROOT}/../util/logs.sh" || exit
 
-for path in $(find . -name "*.go"); do
+for path in **/*.go; do
     go fmt "${path}" || log_failed "Failed go fmt in file ${path}"
 done

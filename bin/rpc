@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Copyright (C) 2020 ulises-jeremias, WilliamGaggiotti
-## Licensed under GPL v3.0
+## Licensed under MIT
 ##
 ##     @script.name [OPTION] ARGUMENTS...
 ##
@@ -10,6 +10,7 @@
 ##                                    Values: simple, ftp, user_lookup, ...
 ##                                    ftp by default
 ##
+##      -d, --daemon                  Execute container in background
 ##          --root                    Execute container as root
 ##          --build                   Build docker image
 ##          --log-file=LOG_FILE_PATH  Logs file path, is /tmp/pdytr.txt by default.
@@ -38,6 +39,10 @@ DOCKER_UTIL_MOUNT="${DOCKER_PROJECT_MOUNT}/util"
 
 if [[ -z "${root}" ]]; then
     USER_FLAG="-u $(id -u):$(id -g)"
+fi
+
+if [[ -n "${daemon}" ]]; then
+    DAEMON_FLAG="-d"
 fi
 
 # creates docker image if it doesn't exists
@@ -71,6 +76,7 @@ docker_run() {
         -v "${UTL_DIR}":"${DOCKER_UTIL_MOUNT}" \
         -w "${DOCKER_PROJECT_MOUNT}" \
         ${USER_FLAG} \
+        ${DAEMON_FLAG} \
         "${IMAGE_NAME}"
     exit
 }

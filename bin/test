@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020 ulises-jeremias, WilliamGaggiotti
+## Licensed under MIT
+##
+##     @script.name
+##
+
+ROOT=$(dirname "$0")
+
+source "${ROOT}/../util/logs.sh" || exit 1
+
+GRPC_APPS=( simple user_lookup request_stream response_stream ftp )
+
+for app in ${GRPC_APPS[*]}; do
+    "${ROOT}"/grpc --app="${app}" --root -d
+
+    # execute test inside docker container
+    docker exec grpc /go/"${app}"/test
+
+    # show logs
+    cat "${ROOT}"/../src/gRPC/"${app}"/logs.txt
+done
+
