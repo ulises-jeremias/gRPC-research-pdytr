@@ -59,7 +59,7 @@ docker_ini() {
     fi
 
     IMAGE_NAME="grpc-util-${lockSum}:latest"
-    IMAGE_NAME_ARRAY=("${IMAGE_NAME//:/ }")
+    IMAGE_NAME_ARRAY=(${IMAGE_NAME//:/ })
 
     if [[ -n "${build}" ]] || [[ "$(docker images "${IMAGE_NAME_ARRAY[0]}" | grep "${IMAGE_NAME_ARRAY[1]}" 2> /dev/null)" = "" ]]; then
         docker build -f ./docker/grpc.Dockerfile \
