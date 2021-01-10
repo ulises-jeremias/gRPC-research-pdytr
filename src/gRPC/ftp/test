@@ -67,10 +67,10 @@ describe "Waitting for server"
 sleep 1
 log_success "Server running at port 4444\n"
 
-# generate files for test (small with 1024 bytes and big with 1G)
+# generate files for test (small with 1024 bytes and big with 200M)
 mkdir tests
 fallocate -l 1024 ./tests/test_write_small.txt
-fallocate -l 1G ./tests/test_write_big.txt
+fallocate -l 200M ./tests/test_write_big.txt
 
 # execute client to write small file 10 times
 test_write "./tests/test_write_small.txt" "small_" 10
