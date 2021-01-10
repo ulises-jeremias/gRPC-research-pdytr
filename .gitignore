@@ -17,3 +17,6 @@
 *.pb.*
 
 *.o
+
+/results/*
+!/results/.gitkeep

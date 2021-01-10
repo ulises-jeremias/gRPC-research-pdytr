@@ -21,6 +21,8 @@ for app in ${GRPC_APPS[*]}; do
     # show logs
     cat "${ROOT}"/../src/gRPC/"${app}"/logs.txt
 
+    cp -f "${ROOT}"/../src/gRPC/"${app}"/logs.txt "${ROOT}"/results
+
     # stop container
     docker stop grpc
 done
