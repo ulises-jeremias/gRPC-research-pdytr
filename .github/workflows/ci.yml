@@ -10,3 +10,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Execute tests
       run: ./bin/test
+    - name: Download results for gRPC
+      uses: actions/download-artifact@v2
+      with:
+        name: grpc-results
+        path: ./src/gRPC/**/*.logs
