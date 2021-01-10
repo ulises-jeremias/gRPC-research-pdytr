@@ -15,7 +15,7 @@
 ##          --log-file=LOG_FILE_PATH  Logs file path, is /tmp/pdytr.txt by default.
 ##
 
-ROOT=$(dirname $0)
+ROOT=$(dirname "$0")
 
 source "${ROOT}/../util/opts/opts.sh" || exit
 source "${ROOT}/../util/logs.sh" || exit
@@ -26,23 +26,25 @@ source "${ROOT}/../util/logs.sh" || exit
 log_file=${log_file:-"/tmp/pdytr.txt"}
 app=${app:-"ftp"}
 
-[ ! -f "${log_file}" ] && touch ${log_file}
+[ ! -f "${log_file}" ] && touch "${log_file}"
 
 # app source dir
 APP_DIR=$(realpath "${ROOT}/../src/RPC/${app}")
+UTL_DIR=$(realpath "${ROOT}/../util")
 
 # docker volume dirs
 DOCKER_PROJECT_MOUNT="/rpc/${app}"
+DOCKER_UTIL_MOUNT="${DOCKER_PROJECT_MOUNT}/util"
 
-if [[ ! -n "${root}" ]]; then
+if [[ -z "${root}" ]]; then
     USER_FLAG="-u $(id -u):$(id -g)"
 fi
 
 # creates docker image if it doesn't exists
 docker_ini() {
     if ! type -p docker > /dev/null; then
-        log_failed "Docker is not installed in this system" ${log_file}
-        exit -1
+        log_failed "Docker is not installed in this system" "${log_file}"
+        exit 1
     fi
 
     if type -p md5 > /dev/null; then
@@ -52,20 +54,21 @@ docker_ini() {
     fi
 
     IMAGE_NAME="rpc-util-${lockSum}:latest"
-    IMAGE_NAME_ARRAY=(${IMAGE_NAME//:/ })
+    IMAGE_NAME_ARRAY=("${IMAGE_NAME//:/ }")
 
-    if [[ -n "${build}" ]] || [[ "$(docker images ${IMAGE_NAME_ARRAY[0]} | grep ${IMAGE_NAME_ARRAY[1]} 2> /dev/null)" = "" ]]; then
+    if [[ -n "${build}" ]] || [[ "$(docker images "${IMAGE_NAME_ARRAY[0]}" | grep "${IMAGE_NAME_ARRAY[1]}" 2> /dev/null)" = "" ]]; then
         docker build -f ./docker/rpc.Dockerfile \
             -t "${IMAGE_NAME}" \
-            --build-arg USER=${USER} \
+            --build-arg USER="${USER}" \
             .
     fi
 }
 
 # run
 docker_run() {
-    docker run --rm -it --net=host \
+    docker run --rm -it --net=host --name rpc \
         -v "${APP_DIR}":"${DOCKER_PROJECT_MOUNT}" \
+        -v "${UTL_DIR}":"${DOCKER_UTIL_MOUNT}" \
         -w "${DOCKER_PROJECT_MOUNT}" \
         ${USER_FLAG} \
         "${IMAGE_NAME}"
@@ -76,5 +79,5 @@ docker_ini
 docker_run
 
 # Help shown by default
-[[ -z "$documentation" ]] && parse_documentation
-echo "$documentation"
+[[ -z "${documentation}" ]] && parse_documentation
+echo "${documentation}"

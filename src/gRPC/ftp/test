@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020 ulises-jeremias, WilliamGaggiotti
+## Licensed under GPL v3.0
+## IMPORTANT: This script must be executed inside the docker container created for gRPC
+##
+##     @script.name [OPTION] ARGUMENTS...
+##
+## Options:
+##          --log-file=LOG_FILE_PATH  Logs file path, is /tmp/logs.txt by default.
+
+ROOT=$(dirname "$0")
+
+source "${ROOT}/util/logs.sh" || exit 1
+
+#==========================================
+# Default argument values and preprocessing
+#==========================================
+log_file=${log_file:-"${ROOT}/logs.txt"}
+
+[ ! -f "${log_file}" ] && touch "${log_file}"
+
+pushd "${ROOT}" || exit 1
+
+test_read() {
+    src="$1"
+    dest_prefix="$2"
+    for i in $(seq 1 "${3}"); do
+        dest="${dest_prefix}${i}.txt"
+
+        (time go run ./client/main.go --src "${src}" --dest "${dest}" read) &>> "${log_file}"
+        echo >> "${log_file}"
+
+        if [[ -z "$(diff "./store/${src}" "${dest}")" ]]; then
+            log_success "There is no diff between ${src} and ${dest}\n\n" "read(${src}, ${dest})" "${log_file}"
+        else
+            log_failed "${src} is different compared to ${dest}\n\n" "read(${src}, ${dest})" "${log_file}"
+        fi
+    done
+}
+
+test_write() {
+    src="$1"
+    dest_prefix="$2"
+    for i in $(seq 1 "${3}"); do
+        dest="${dest_prefix}${i}.txt"
+
+        (time go run ./client/main.go --src "${src}" --dest "${dest}" write) &>> "${log_file}"
+        echo >> "${log_file}"
+
+        if [[ -z "$(diff "${src}" "./store/${dest}")" ]]; then
+            log_success "There is no diff between ${src} and ${dest}\n\n" "write(${src}, ${dest})" "${log_file}"
+        else
+            log_failed "${src} is different compared to ${dest}\n\n" "write(${src}, ${dest})" "${log_file}"
+        fi
+    done
+}
+
+# generate proto file
+protoc --go_out=plugins=grpc:. ./ftp.proto
+
+# execute server in background
+go run ./server/main.go &
+
+# wait until server is running
+describe "Waitting for server"
+log_success "Server running at port 4444\n"
+
+# execute client to write small file 10 times
+test_write "./tests/test_write_small.txt" "small_" 10
+
+# execute client to write big file 10 times
+# test_write "./tests/test_write_big.txt" "big_" 10
+
+# execute client to read small file 10 times
+test_read "small_1.txt" "./tests/out/small_" 10
+
+# execute client to read big file 10 times
+# test_read "big_1.txt" "./tests/out/big_" 10

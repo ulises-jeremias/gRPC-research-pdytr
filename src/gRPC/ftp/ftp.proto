@@ -11,7 +11,6 @@ message ReadRequest {
 message WriteRequest {
     string name = 1;
     string data = 3;
-    int32 mode = 2;
     int64 checksum = 4;
 }
 
@@ -33,7 +32,7 @@ message ListResponse {
 }
 
 service Operations {
-    rpc Read(stream ReadRequest) returns (stream ReadResponse);
+    rpc Read(ReadRequest) returns (stream ReadResponse);
     rpc Write(stream WriteRequest) returns (WriteResponse);
     rpc List(ListRequest) returns (ListResponse);
 }
