@@ -14,4 +14,4 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: grpc-results
-        path: ./src/gRPC/**/*.logs
+        path: ./src/gRPC/**/logs.txt
