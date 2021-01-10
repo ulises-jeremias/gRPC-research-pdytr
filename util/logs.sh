@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-YELLOW=$(tput setaf 3)
-RESET=$(tput sgr0)
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+RESET="\e[0m"
 CHECK="✓"
 CROSS="✗"
 WARN="⚠"
@@ -18,20 +18,20 @@ describe() {
 log_warn() {
     message=${1:-"Warning"}
     log="${YELLOW}${WARN} ${message}${RESET}"
-    printf " %s\n" "${log}"
-    [ -f "$3" ] && printf "%s %s\n" "$2" "${log}" >> "$3"
+    echo -e "${log}"
+    [ -f "$3" ] && echo "$2 ${log}" >> "$3"
 }
 
 log_failed() {
     message=${1:-"Failed"}
     log="${RED}${CROSS} ${message}${RESET}"
-    printf " %s\n" "${log}"
-    [ -f "$3" ] && printf "%s %s\n" "$2" "${log}" >> "$3"
+    echo -e "${log}"
+    [ -f "$3" ] && echo "$2 ${log}" >> "$3"
 }
 
 log_success() {
     message=${1:-"Success"}
     log="${GREEN}${CHECK} ${message}${RESET}"
-    printf " %s\n" "${log}"
-    [ -f "$3" ] && printf "%s %s\n" "$2" "${log}" >> "$3"
+    echo -e "${log}"
+    [ -f "$3" ] && echo "$2 ${log}" >> "$3"
 }

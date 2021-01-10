@@ -1498,3 +1498,583 @@ user	0m0.218s
 sys	0m0.091s
 
 read(small_1.txt, ./tests/out/small_10.txt) ✓ There is no diff between small_1.txt and ./tests/out/small_10.txt\n\n
+2021/01/10 15:46:11 21
+
+real	0m0.644s
+user	0m0.790s
+sys	0m0.139s
+
+write(./tests/test_write_small.txt, small_1.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_1.txt\n\n\e[0m
+2021/01/10 15:46:11 21
+
+real	0m0.502s
+user	0m0.635s
+sys	0m0.149s
+
+write(./tests/test_write_small.txt, small_2.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_2.txt\n\n\e[0m
+2021/01/10 15:46:12 21
+
+real	0m0.491s
+user	0m0.639s
+sys	0m0.159s
+
+write(./tests/test_write_small.txt, small_3.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_3.txt\n\n\e[0m
+2021/01/10 15:46:12 21
+
+real	0m0.486s
+user	0m0.651s
+sys	0m0.104s
+
+write(./tests/test_write_small.txt, small_4.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_4.txt\n\n\e[0m
+2021/01/10 15:46:13 21
+
+real	0m0.495s
+user	0m0.661s
+sys	0m0.110s
+
+write(./tests/test_write_small.txt, small_5.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_5.txt\n\n\e[0m
+2021/01/10 15:46:13 21
+
+real	0m0.477s
+user	0m0.570s
+sys	0m0.140s
+
+write(./tests/test_write_small.txt, small_6.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_6.txt\n\n\e[0m
+2021/01/10 15:46:14 21
+
+real	0m0.521s
+user	0m0.624s
+sys	0m0.132s
+
+write(./tests/test_write_small.txt, small_7.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_7.txt\n\n\e[0m
+2021/01/10 15:46:14 21
+
+real	0m0.500s
+user	0m0.641s
+sys	0m0.141s
+
+write(./tests/test_write_small.txt, small_8.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_8.txt\n\n\e[0m
+2021/01/10 15:46:15 21
+
+real	0m0.502s
+user	0m0.677s
+sys	0m0.113s
+
+write(./tests/test_write_small.txt, small_9.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_9.txt\n\n\e[0m
+2021/01/10 15:46:15 21
+
+real	0m0.481s
+user	0m0.637s
+sys	0m0.125s
+
+write(./tests/test_write_small.txt, small_10.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_10.txt\n\n\e[0m
+2021/01/10 15:46:16 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.505s
+user	0m0.621s
+sys	0m0.144s
+
+write(./tests/test_write_big.txt, big_1.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_1.txt\n\n\e[0m
+2021/01/10 15:46:16 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.496s
+user	0m0.644s
+sys	0m0.139s
+
+write(./tests/test_write_big.txt, big_2.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_2.txt\n\n\e[0m
+2021/01/10 15:46:17 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.497s
+user	0m0.688s
+sys	0m0.109s
+
+write(./tests/test_write_big.txt, big_3.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_3.txt\n\n\e[0m
+2021/01/10 15:46:17 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.482s
+user	0m0.649s
+sys	0m0.098s
+
+write(./tests/test_write_big.txt, big_4.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_4.txt\n\n\e[0m
+2021/01/10 15:46:18 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.500s
+user	0m0.647s
+sys	0m0.132s
+
+write(./tests/test_write_big.txt, big_5.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_5.txt\n\n\e[0m
+2021/01/10 15:46:18 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.493s
+user	0m0.646s
+sys	0m0.143s
+
+write(./tests/test_write_big.txt, big_6.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_6.txt\n\n\e[0m
+2021/01/10 15:46:19 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.500s
+user	0m0.577s
+sys	0m0.159s
+
+write(./tests/test_write_big.txt, big_7.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_7.txt\n\n\e[0m
+2021/01/10 15:46:19 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.490s
+user	0m0.595s
+sys	0m0.163s
+
+write(./tests/test_write_big.txt, big_8.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_8.txt\n\n\e[0m
+2021/01/10 15:46:20 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.485s
+user	0m0.669s
+sys	0m0.103s
+
+write(./tests/test_write_big.txt, big_9.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_9.txt\n\n\e[0m
+2021/01/10 15:46:20 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.492s
+user	0m0.669s
+sys	0m0.098s
+
+write(./tests/test_write_big.txt, big_10.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_10.txt\n\n\e[0m
+
+real	0m0.493s
+user	0m0.619s
+sys	0m0.116s
+
+read(small_1.txt, ./tests/out/small_1.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_1.txt\n\n\e[0m
+
+real	0m0.517s
+user	0m0.627s
+sys	0m0.163s
+
+read(small_1.txt, ./tests/out/small_2.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_2.txt\n\n\e[0m
+
+real	0m0.500s
+user	0m0.606s
+sys	0m0.174s
+
+read(small_1.txt, ./tests/out/small_3.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_3.txt\n\n\e[0m
+
+real	0m0.496s
+user	0m0.619s
+sys	0m0.168s
+
+read(small_1.txt, ./tests/out/small_4.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_4.txt\n\n\e[0m
+
+real	0m0.508s
+user	0m0.568s
+sys	0m0.213s
+
+read(small_1.txt, ./tests/out/small_5.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_5.txt\n\n\e[0m
+
+real	0m0.494s
+user	0m0.625s
+sys	0m0.150s
+
+read(small_1.txt, ./tests/out/small_6.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_6.txt\n\n\e[0m
+
+real	0m0.493s
+user	0m0.617s
+sys	0m0.128s
+
+read(small_1.txt, ./tests/out/small_7.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_7.txt\n\n\e[0m
+
+real	0m0.494s
+user	0m0.649s
+sys	0m0.125s
+
+read(small_1.txt, ./tests/out/small_8.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_8.txt\n\n\e[0m
+
+real	0m0.493s
+user	0m0.622s
+sys	0m0.127s
+
+read(small_1.txt, ./tests/out/small_9.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_9.txt\n\n\e[0m
+
+real	0m0.513s
+user	0m0.656s
+sys	0m0.131s
+
+read(small_1.txt, ./tests/out/small_10.txt) \e[32m✓ There is no diff between small_1.txt and ./tests/out/small_10.txt\n\n\e[0m
+2021/01/10 15:46:26 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.497s
+user	0m0.639s
+sys	0m0.113s
+
+read(big_1.txt, ./tests/out/big_1.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_1.txt\n\n\e[0m
+2021/01/10 15:46:26 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.499s
+user	0m0.637s
+sys	0m0.140s
+
+read(big_1.txt, ./tests/out/big_2.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_2.txt\n\n\e[0m
+2021/01/10 15:46:27 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.508s
+user	0m0.624s
+sys	0m0.149s
+
+read(big_1.txt, ./tests/out/big_3.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_3.txt\n\n\e[0m
+2021/01/10 15:46:27 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.524s
+user	0m0.653s
+sys	0m0.136s
+
+read(big_1.txt, ./tests/out/big_4.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_4.txt\n\n\e[0m
+2021/01/10 15:46:28 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.516s
+user	0m0.649s
+sys	0m0.143s
+
+read(big_1.txt, ./tests/out/big_5.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_5.txt\n\n\e[0m
+2021/01/10 15:46:28 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.510s
+user	0m0.654s
+sys	0m0.125s
+
+read(big_1.txt, ./tests/out/big_6.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_6.txt\n\n\e[0m
+2021/01/10 15:46:29 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.503s
+user	0m0.657s
+sys	0m0.107s
+
+read(big_1.txt, ./tests/out/big_7.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_7.txt\n\n\e[0m
+2021/01/10 15:46:29 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.540s
+user	0m0.719s
+sys	0m0.128s
+
+read(big_1.txt, ./tests/out/big_8.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_8.txt\n\n\e[0m
+2021/01/10 15:46:30 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.499s
+user	0m0.663s
+sys	0m0.127s
+
+read(big_1.txt, ./tests/out/big_9.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_9.txt\n\n\e[0m
+2021/01/10 15:46:31 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.513s
+user	0m0.680s
+sys	0m0.119s
+
+read(big_1.txt, ./tests/out/big_10.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_10.txt\n\n\e[0m
+2021/01/10 15:48:51 21
+
+real	0m0.658s
+user	0m0.774s
+sys	0m0.151s
+
+write(./tests/test_write_small.txt, small_1.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_1.txt\n\n\e[0m
+2021/01/10 15:48:51 21
+
+real	0m0.504s
+user	0m0.622s
+sys	0m0.156s
+
+write(./tests/test_write_small.txt, small_2.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_2.txt\n\n\e[0m
+2021/01/10 15:48:52 21
+
+real	0m0.489s
+user	0m0.636s
+sys	0m0.141s
+
+write(./tests/test_write_small.txt, small_3.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_3.txt\n\n\e[0m
+2021/01/10 15:48:52 21
+
+real	0m0.490s
+user	0m0.641s
+sys	0m0.137s
+
+write(./tests/test_write_small.txt, small_4.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_4.txt\n\n\e[0m
+2021/01/10 15:48:53 21
+
+real	0m0.500s
+user	0m0.650s
+sys	0m0.104s
+
+write(./tests/test_write_small.txt, small_5.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_5.txt\n\n\e[0m
+2021/01/10 15:48:53 21
+
+real	0m0.504s
+user	0m0.608s
+sys	0m0.154s
+
+write(./tests/test_write_small.txt, small_6.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_6.txt\n\n\e[0m
+2021/01/10 15:48:54 21
+
+real	0m0.490s
+user	0m0.645s
+sys	0m0.125s
+
+write(./tests/test_write_small.txt, small_7.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_7.txt\n\n\e[0m
+2021/01/10 15:48:54 21
+
+real	0m0.509s
+user	0m0.656s
+sys	0m0.134s
+
+write(./tests/test_write_small.txt, small_8.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_8.txt\n\n\e[0m
+2021/01/10 15:48:55 21
+
+real	0m0.486s
+user	0m0.628s
+sys	0m0.140s
+
+write(./tests/test_write_small.txt, small_9.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_9.txt\n\n\e[0m
+2021/01/10 15:48:55 21
+
+real	0m0.493s
+user	0m0.623s
+sys	0m0.148s
+
+write(./tests/test_write_small.txt, small_10.txt) \e[32m✓ There is no diff between ./tests/test_write_small.txt and small_10.txt\n\n\e[0m
+2021/01/10 15:48:56 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.574s
+user	0m0.680s
+sys	0m0.144s
+
+write(./tests/test_write_big.txt, big_1.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_1.txt\n\n\e[0m
+2021/01/10 15:48:56 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.488s
+user	0m0.617s
+sys	0m0.153s
+
+write(./tests/test_write_big.txt, big_2.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_2.txt\n\n\e[0m
+2021/01/10 15:48:57 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.489s
+user	0m0.642s
+sys	0m0.138s
+
+write(./tests/test_write_big.txt, big_3.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_3.txt\n\n\e[0m
+2021/01/10 15:48:57 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.488s
+user	0m0.623s
+sys	0m0.119s
+
+write(./tests/test_write_big.txt, big_4.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_4.txt\n\n\e[0m
+2021/01/10 15:48:58 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.493s
+user	0m0.593s
+sys	0m0.129s
+
+write(./tests/test_write_big.txt, big_5.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_5.txt\n\n\e[0m
+2021/01/10 15:48:58 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.492s
+user	0m0.572s
+sys	0m0.158s
+
+write(./tests/test_write_big.txt, big_6.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_6.txt\n\n\e[0m
+2021/01/10 15:48:59 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.494s
+user	0m0.621s
+sys	0m0.159s
+
+write(./tests/test_write_big.txt, big_7.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_7.txt\n\n\e[0m
+2021/01/10 15:48:59 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.509s
+user	0m0.648s
+sys	0m0.100s
+
+write(./tests/test_write_big.txt, big_8.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_8.txt\n\n\e[0m
+2021/01/10 15:49:00 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.499s
+user	0m0.680s
+sys	0m0.108s
+
+write(./tests/test_write_big.txt, big_9.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_9.txt\n\n\e[0m
+2021/01/10 15:49:00 Error to read [file=./tests/test_write_big.txt]: open ./tests/test_write_big.txt: no such file or directory
+exit status 1
+
+real	0m0.490s
+user	0m0.622s
+sys	0m0.119s
+
+write(./tests/test_write_big.txt, big_10.txt) \e[32m✓ There is no diff between ./tests/test_write_big.txt and big_10.txt\n\n\e[0m
+
+real	0m0.494s
+user	0m0.643s
+sys	0m0.136s
+
+read(small_1.txt, ./tests/out/small_1.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_1.txt\n\n\e[0m
+
+real	0m0.490s
+user	0m0.590s
+sys	0m0.119s
+
+read(small_1.txt, ./tests/out/small_2.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_2.txt\n\n\e[0m
+
+real	0m0.498s
+user	0m0.652s
+sys	0m0.140s
+
+read(small_1.txt, ./tests/out/small_3.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_3.txt\n\n\e[0m
+
+real	0m0.503s
+user	0m0.623s
+sys	0m0.112s
+
+read(small_1.txt, ./tests/out/small_4.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_4.txt\n\n\e[0m
+
+real	0m0.518s
+user	0m0.645s
+sys	0m0.138s
+
+read(small_1.txt, ./tests/out/small_5.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_5.txt\n\n\e[0m
+
+real	0m0.494s
+user	0m0.673s
+sys	0m0.098s
+
+read(small_1.txt, ./tests/out/small_6.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_6.txt\n\n\e[0m
+
+real	0m0.502s
+user	0m0.648s
+sys	0m0.132s
+
+read(small_1.txt, ./tests/out/small_7.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_7.txt\n\n\e[0m
+
+real	0m0.497s
+user	0m0.649s
+sys	0m0.134s
+
+read(small_1.txt, ./tests/out/small_8.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_8.txt\n\n\e[0m
+
+real	0m0.522s
+user	0m0.642s
+sys	0m0.128s
+
+read(small_1.txt, ./tests/out/small_9.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_9.txt\n\n\e[0m
+
+real	0m0.506s
+user	0m0.645s
+sys	0m0.154s
+
+read(small_1.txt, ./tests/out/small_10.txt) \e[31m✗ small_1.txt is different compared to ./tests/out/small_10.txt\n\n\e[0m
+2021/01/10 15:49:06 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.496s
+user	0m0.647s
+sys	0m0.115s
+
+read(big_1.txt, ./tests/out/big_1.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_1.txt\n\n\e[0m
+2021/01/10 15:49:06 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.501s
+user	0m0.662s
+sys	0m0.130s
+
+read(big_1.txt, ./tests/out/big_2.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_2.txt\n\n\e[0m
+2021/01/10 15:49:07 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.491s
+user	0m0.611s
+sys	0m0.174s
+
+read(big_1.txt, ./tests/out/big_3.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_3.txt\n\n\e[0m
+2021/01/10 15:49:07 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.498s
+user	0m0.601s
+sys	0m0.148s
+
+read(big_1.txt, ./tests/out/big_4.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_4.txt\n\n\e[0m
+2021/01/10 15:49:08 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.498s
+user	0m0.641s
+sys	0m0.095s
+
+read(big_1.txt, ./tests/out/big_5.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_5.txt\n\n\e[0m
+2021/01/10 15:49:08 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.497s
+user	0m0.662s
+sys	0m0.128s
+
+read(big_1.txt, ./tests/out/big_6.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_6.txt\n\n\e[0m
+2021/01/10 15:49:09 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.504s
+user	0m0.677s
+sys	0m0.107s
+
+read(big_1.txt, ./tests/out/big_7.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_7.txt\n\n\e[0m
+2021/01/10 15:49:09 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.513s
+user	0m0.642s
+sys	0m0.156s
+
+read(big_1.txt, ./tests/out/big_8.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_8.txt\n\n\e[0m
+2021/01/10 15:49:10 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.503s
+user	0m0.597s
+sys	0m0.147s
+
+read(big_1.txt, ./tests/out/big_9.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_9.txt\n\n\e[0m
+2021/01/10 15:49:10 can not receive rpc error: code = Unknown desc = open store/big_1.txt: no such file or directory
+exit status 1
+
+real	0m0.494s
+user	0m0.586s
+sys	0m0.155s
+
+read(big_1.txt, ./tests/out/big_10.txt) \e[32m✓ There is no diff between big_1.txt and ./tests/out/big_10.txt\n\n\e[0m

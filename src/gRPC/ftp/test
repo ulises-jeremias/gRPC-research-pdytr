@@ -70,10 +70,10 @@ log_success "Server running at port 4444\n"
 test_write "./tests/test_write_small.txt" "small_" 10
 
 # execute client to write big file 10 times
-# test_write "./tests/test_write_big.txt" "big_" 10
+test_write "./tests/test_write_big.txt" "big_" 10
 
 # execute client to read small file 10 times
 test_read "small_1.txt" "./tests/out/small_" 10
 
 # execute client to read big file 10 times
-# test_read "big_1.txt" "./tests/out/big_" 10
+test_read "big_1.txt" "./tests/out/big_" 10
