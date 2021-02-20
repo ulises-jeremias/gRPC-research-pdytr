@@ -1,6 +1,7 @@
 # gRPC-research-pdytr
 
-[![Execute tests to get results](https://github.com/ulises-jeremias/gRPC-research-pdytr/actions/workflows/ci.yml/badge.svg)](https://github.com/ulises-jeremias/gRPC-research-pdytr/actions/workflows/ci.yml)
+[![Tests Status][workflowbadge]][workflowurl]
+[![License: MIT][licensebadge]][licenseurl]
 
 - [gRPC-research-pdytr](#grpc-research-pdytr)
   - [gRPC](#grpc)
@@ -94,3 +95,8 @@ $ ./bin/test
 ```
 
 These tests are already executed on every commit to master on Github Actions. You can check the workflows and download the performance tests results.
+
+[workflowbadge]: https://github.com/ulises-jeremias/gRPC-research-pdytr/actions/workflows/ci.yml/badge.svg
+[licensebadge]: https://img.shields.io/badge/License-MIT-blue.svg
+[workflowurl]: https://github.com/ulises-jeremias/gRPC-research-pdytr/actions/workflows/ci.yml
+[licenseurl]: https://github.com/ulises-jeremias/gRPC-research-pdytr/blob/master/LICENSE
