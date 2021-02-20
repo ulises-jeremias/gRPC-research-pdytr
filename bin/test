@@ -8,9 +8,11 @@
 
 ROOT=$(dirname "$0")
 
+source "${ROOT}/../util/opts/opts.sh" || exit 1
 source "${ROOT}/../util/logs.sh" || exit 1
 
 GRPC_APPS=( simple user_lookup request_stream response_stream ftp )
+RPC_APPS=( simple user_lookup list array ftp )
 
 mkdir "${ROOT}"/../results
 
@@ -21,12 +23,28 @@ for app in ${GRPC_APPS[*]}; do
     docker exec grpc /go/"${app}"/test
 
     # show logs
-    cat "${ROOT}"/../src/gRPC/"${app}"/logs.txt
+    cat "${ROOT}"/../src/gRPC/"${app}"/results.log
 
     # copy logs into results dir
-    cp -f "${ROOT}"/../src/gRPC/"${app}"/logs.txt "${ROOT}"/../results/grpc-"${app}".log
+    cp -f "${ROOT}"/../src/gRPC/"${app}"/results.log "${ROOT}"/../results/grpc-"${app}".log
 
     # stop container
     docker stop grpc
+done
+
+for app in ${RPC_APPS[*]}; do
+    "${ROOT}"/rpc --app="${app}" --root -d
+
+    # execute test inside docker container
+    docker exec rpc /rpc/"${app}"/test
+
+    # show logs
+    cat "${ROOT}"/../src/RPC/"${app}"/results.log
+
+    # copy logs into results dir
+    cp -f "${ROOT}"/../src/RPC/"${app}"/results.log "${ROOT}"/../results/rpc-"${app}".log
+
+    # stop container
+    docker stop rpc
 done
 

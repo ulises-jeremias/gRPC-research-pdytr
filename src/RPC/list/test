@@ -2,7 +2,7 @@
 
 ## Copyright (C) 2020 ulises-jeremias, WilliamGaggiotti
 ## Licensed under MIT
-## IMPORTANT: This script must be executed inside the docker container created for gRPC
+## IMPORTANT: This script must be executed inside the docker container created for RPC
 ##
 ##     @script.name [OPTION] ARGUMENTS...
 ##
@@ -23,23 +23,29 @@ log_file=${log_file:-"${ROOT}/results.log"}
 
 cd "${ROOT}" || exit 1
 
-test_simple() {
+test_list() {
     for _ in $(seq 1 "$1"); do
-        (time go run ./client/main.go) &>> "${log_file}"
+        (time ./client localhost 8 3 5) &>> "${log_file}"
         echo >> "${log_file}"
     done
 }
 
-# generate proto file
-protoc --go_out=plugins=grpc:. ./simp.proto
+# generate binaries
+make
+
+# bind rpc
+rpcbind
 
 # execute server in background
-go run ./server/main.go &
+./server &
 
 # wait until server is running
 describe "Waitting for server"
 sleep 1
-log_success "Server running at port 4444\n"
+log_success "Server running\n"
 
 # execute client with user number
-test_simple 10
+test_list 10
+
+# clean all generated files
+make clean

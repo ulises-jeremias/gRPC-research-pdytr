@@ -28,5 +28,5 @@ userlookup_xdr.c: userlookup.x
 	rpcgen -C userlookup.x
 
 clean: 
-	rm *.o userlookup.h userlookup_clnt.c userlookup_svc.c userlookup_xdr.* *~
+	rm *.o userlookup.h userlookup_clnt.c userlookup_svc.c userlookup_xdr.* client server
 

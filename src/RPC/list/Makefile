@@ -15,7 +15,7 @@ ll.h: ll.x
 	rpcgen -C ll.x
 
 clean: 
-	rm *.o ll.h ll_svc.* ll_clnt.* ll_xdr.*
+	rm *.o ll.h ll_svc.* ll_clnt.* ll_xdr.* client server
 
 llclient.c: ll.h
 llservice.c: ll.h
