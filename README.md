@@ -1,5 +1,16 @@
 # gRPC-research-pdytr
 
+[![Execute tests to get results](https://github.com/ulises-jeremias/gRPC-research-pdytr/actions/workflows/ci.yml/badge.svg)](https://github.com/ulises-jeremias/gRPC-research-pdytr/actions/workflows/ci.yml)
+
+- [gRPC-research-pdytr](#grpc-research-pdytr)
+  - [gRPC](#grpc)
+    - [Quickstart](#quickstart)
+    - [Simple example](#simple-example)
+  - [RPC](#rpc)
+    - [Quickstart](#quickstart-1)
+    - [Simple example](#simple-example-1)
+  - [Tests](#tests)
+
 ## gRPC
 
 ### Quickstart
@@ -26,7 +37,7 @@ This will execute a docker container in interactive mode with a volume in the di
 
 Once the docker container is running you will be able to run the following examples!
 
-## Simple example
+### Simple example
 
 ```sh
 # generate proto file
@@ -61,7 +72,7 @@ This will execute a docker container in interactive mode with a volume in the di
 
 Once the docker container is running you will be able to run the following examples!
 
-## Simple example
+### Simple example
 
 ```sh
 # build binaries
@@ -73,3 +84,13 @@ Once the docker container is running you will be able to run the following examp
 # execute client
 ~> ./client
 ```
+
+## Tests
+
+You can run all tests executing the following command:
+
+```sh
+$ ./bin/test
+```
+
+These tests are already executed on every commit to master on Github Actions. You can check the workflows and download the performance tests results.
