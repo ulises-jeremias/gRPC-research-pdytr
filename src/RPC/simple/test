@@ -32,6 +32,7 @@ test_simple() {
 
 # generate binaries
 make
+make
 
 # bind rpc
 rpcbind
