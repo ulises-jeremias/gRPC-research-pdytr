@@ -14,8 +14,8 @@ SOURCES_SVC.h =
 SOURCES.x = vadd.x
 
 TARGETS_SVC.c = vadd_svc.c vadd_service.c vadd_xdr.c 
-TARGETS_CLNT.c = vadd_clnt.c vadd_client.c vadd_xdr.c 
-TARGETS = vadd.h vadd_xdr.c vadd_clnt.c vadd_svc.c vadd_client.c vadd_service.c
+TARGETS_CLNT.c = vadd_clnt.c vadd_xdr.c 
+TARGETS = vadd.h vadd_xdr.c vadd_clnt.c vadd_svc.c vadd_service.c
 
 OBJECTS_CLNT = $(SOURCES_CLNT.c:%.c=%.o) $(TARGETS_CLNT.c:%.c=%.o) 
 OBJECTS_SVC = $(SOURCES_SVC.c:%.c=%.o) $(TARGETS_SVC.c:%.c=%.o) 

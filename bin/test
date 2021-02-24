@@ -12,7 +12,7 @@ source "${ROOT}/../util/opts/opts.sh" || exit 1
 source "${ROOT}/../util/logs.sh" || exit 1
 
 GRPC_APPS=( simple user_lookup request_stream response_stream ftp )
-RPC_APPS=( simple user_lookup list array ftp )
+RPC_APPS=( simple user_lookup list ftp )
 
 mkdir "${ROOT}"/../results
 

@@ -31,7 +31,7 @@ test_list() {
 }
 
 # generate binaries
-make
+rpcgen -C ll.x
 make
 
 # bind rpc
