@@ -19,6 +19,9 @@ mkdir "${ROOT}"/../results
 for app in ${GRPC_APPS[*]}; do
     "${ROOT}"/grpc --app="${app}" --root -d
 
+    # wait until setup is running
+    sleep 2
+
     # execute test inside docker container
     docker exec grpc /go/"${app}"/test
 
@@ -34,6 +37,9 @@ done
 
 for app in ${RPC_APPS[*]}; do
     "${ROOT}"/rpc --app="${app}" --root -d
+
+    # wait until setup is running
+    sleep 2
 
     # execute test inside docker container
     docker exec rpc /rpc/"${app}"/test
