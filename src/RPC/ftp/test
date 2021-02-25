@@ -78,13 +78,13 @@ fallocate -l 1024 ./tests/test_write_small.txt
 fallocate -l 200M ./tests/test_write_big.txt
 
 # execute client to write small file 10 times
-test_write "./tests/test_write_small.txt" "./store/small_" 1
+test_write "./tests/test_write_small.txt" "./store/small_" 10
 
 # execute client to write big file 10 times
 test_write "./tests/test_write_big.txt" "./store/big_" 10
 
 # execute client to read small file 10 times
-test_read "./store/small_1.txt" "./tests/out/small_" 1
+test_read "./store/small_1.txt" "./tests/out/small_" 10
 
 # execute client to read big file 10 times
 test_read "./store/big_1.txt" "./tests/out/big_" 10
