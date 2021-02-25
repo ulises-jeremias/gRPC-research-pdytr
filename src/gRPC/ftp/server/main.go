@@ -10,7 +10,6 @@ import (
 	"log"
 	"net"
 	"os"
-	"path"
 	"path/filepath"
 	"strings"
 
@@ -38,7 +37,7 @@ func main() {
 func (s *server) Read(req *ftp.ReadRequest, stream ftp.Operations_ReadServer) error {
 	isEOF := false
 	bytes := req.Bytes
-	filePath := path.Join("store", req.Name)
+	filePath := req.Name
 
 	log.Printf("Path: %s", filePath)
 
@@ -117,7 +116,7 @@ func (s *server) Write(stream ftp.Operations_WriteServer) error {
 			return err
 		}
 
-		filePath := path.Join("store", req.Name)
+		filePath := req.Name
 		dirPath := filepath.Dir(filePath)
 
 		// save buffer data

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
+#include <libgen.h>
 #include <inttypes.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -38,22 +39,25 @@ write_1_svc(ftp_wfile arg, struct svc_req *rqstp)
         char path[PATH_MAX];
 
         // Set path
-        snprintf(path, PATH_MAX, "%s/%s", "store", name);
+        snprintf(path, PATH_MAX, "%s", name);
         
         printf("Path: %s\n\n", path);
 
-        dir = opendir("store");
+        char *path_dup = strdup(path);
+        const char *dir_name = dirname(path_dup);
+
+        dir = opendir(dir_name);
         if (dir)
         {
                 closedir(dir);
         }
         else if (ENOENT == errno)
         {
-                mkdir("store", 0777);
+                mkdir(dir_name, 0777);
         }
         else
         {
-                fprintf(stderr, "Error creating file '%s'\n", path);
+                fprintf(stderr, "Error creating dir '%s'\n", path);
                 result = -1;
                 return &result;
         }
@@ -93,7 +97,7 @@ read_1_svc(ftp_req arg, struct svc_req *rqstp)
         char path[PATH_MAX];
 
         // Set path
-        snprintf(path, PATH_MAX, "%s/%s", "store", name);
+        snprintf(path, PATH_MAX, "%s", name);
 
         FILE *file;
         ftp_file *file_struct;

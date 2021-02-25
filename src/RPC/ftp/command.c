@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 #include <stddef.h>
 #include <string.h>
 #include <inttypes.h>
+#include <libgen.h>
+#include <dirent.h>
 
 #include <include/command.h>
 #include <include/util.h>
@@ -18,7 +21,8 @@ ftp_read(CLIENT *clnt, ftp_param_t *param)
         uint64_t initial_pos = param->initial_pos;
         int read_all = !param->bytes_flag;
 
-        FILE* file;
+        FILE *file;
+        DIR *dir;
         ftp_file *ftp_file_data;
         ftp_file_data = (ftp_file *) malloc(sizeof(ftp_file));
         
@@ -30,8 +34,25 @@ ftp_read(CLIENT *clnt, ftp_param_t *param)
                 .bytes = bytes,
         };
 
-        file = fopen(dest, "w");
+        char *dest_path = strdup(dest);
+        const char *dir_name = dirname(dest_path);
 
+        dir = opendir(dir_name);
+        if (dir)
+        {
+                closedir(dir);
+        }
+        else if (ENOENT == errno)
+        {
+                mkdir(dir_name, 0777);
+        }
+        else
+        {
+                fprintf(stderr, "Error creating dir '%s'\n", dest);
+                return 1;
+        }
+
+        file = fopen(dest, "w");
         if (file == NULL)
         {
                 fprintf(stderr, "Error opening file %s\n", src);
@@ -123,7 +144,7 @@ ftp_write(CLIENT *clnt, ftp_param_t *param)
                 }
                 else if (*result == -1)
                 {
-                        fprintf(stderr, "Error creating file 'store/%s' in server\n", dest);
+                        fprintf(stderr, "Error creating file '%s' in server\n", dest);
                 }
 
                 total_bytes_read += bytes_read;
@@ -131,7 +152,7 @@ ftp_write(CLIENT *clnt, ftp_param_t *param)
 
         fclose(file);
 
-        printf("File stored at 'store/%s'\n", dest);
+        printf("File stored at '%s'\n", dest);
 
         return(*result);
 }

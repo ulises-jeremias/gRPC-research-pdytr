@@ -32,7 +32,7 @@ test_read() {
         (time ./client read --src "${src}" --dest "${dest}") &>> "${log_file}"
         echo >> "${log_file}"
 
-        if diff "./store/${src}" "${dest}" &> /dev/null; then
+        if diff "${src}" "${dest}" &> /dev/null; then
             log_success "There is no diff between ${src} and ${dest}\n\n" "read(${src}, ${dest})" "${log_file}"
         else
             log_failed "${src} is different compared to ${dest}\n\n" "read(${src}, ${dest})" "${log_file}"
@@ -49,7 +49,7 @@ test_write() {
         (time ./client write --src "${src}" --dest "${dest}") &>> "${log_file}"
         echo >> "${log_file}"
 
-        if diff "${src}" "./store/${dest}" &> /dev/null; then
+        if diff "${src}" "${dest}" &> /dev/null; then
             log_success "There is no diff between ${src} and ${dest}\n\n" "write(${src}, ${dest})" "${log_file}"
         else
             log_failed "${src} is different compared to ${dest}\n\n" "write(${src}, ${dest})" "${log_file}"
@@ -78,16 +78,16 @@ fallocate -l 1024 ./tests/test_write_small.txt
 fallocate -l 200M ./tests/test_write_big.txt
 
 # execute client to write small file 10 times
-test_write "./tests/test_write_small.txt" "small_" 10
+test_write "./tests/test_write_small.txt" "./store/small_" 1
 
 # execute client to write big file 10 times
-test_write "./tests/test_write_big.txt" "big_" 10
+test_write "./tests/test_write_big.txt" "./store/big_" 10
 
 # execute client to read small file 10 times
-test_read "small_1.txt" "./tests/out/small_" 10
+test_read "./store/small_1.txt" "./tests/out/small_" 1
 
 # execute client to read big file 10 times
-test_read "big_1.txt" "./tests/out/big_" 10
+test_read "./store/big_1.txt" "./tests/out/big_" 10
 
 # clean all generated files
 make clean
