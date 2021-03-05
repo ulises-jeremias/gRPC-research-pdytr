@@ -12,7 +12,7 @@
 #include <include/util.h>
 #include <ftp.h>
 
-const int CHUNCK_SIZE = 1024;
+const int CHUNK_SIZE = 1024;
 
 /* Wrapper function takes care of calling the RPC procedure */
 int
@@ -114,9 +114,9 @@ ftp_write(CLIENT *clnt, ftp_param_t *param)
         }
 
         uint64_t bytes_read, total_bytes_read = 0;
-        char *buffer = (char *) malloc(CHUNCK_SIZE + 2);
+        char *buffer = (char *) malloc(CHUNK_SIZE + 2);
 
-        while ((bytes_read = fread(buffer, sizeof(char), CHUNCK_SIZE, file)) > 0 && (total_bytes_read <= bytes || !bytes_flag))
+        while ((bytes_read = fread(buffer, sizeof(char), CHUNK_SIZE, file)) > 0 && (total_bytes_read <= bytes || !bytes_flag))
         {
                 ftp_wfile ftp_file_data;
 

@@ -16,7 +16,7 @@
 #include <include/util.h>
 #include <ftp.h>
 
-const int CHUNCK_SIZE = 1024;
+const int CHUNK_SIZE = 1024;
 
 /* Here is the actual remote procedure */
 /* The return value of this procedure must be a pointer to int! */
@@ -31,7 +31,7 @@ write_1_svc(ftp_wfile arg, struct svc_req *rqstp)
         int length = arg.data.data_len;
         uint64_t income_checksum = arg.checksum;
 
-        char *buffer = (char *) malloc(CHUNCK_SIZE + 2);
+        char *buffer = (char *) malloc(CHUNK_SIZE + 2);
         strncpy(buffer, arg.data.data_val, length);
 
         // Declare variables
@@ -106,14 +106,14 @@ read_1_svc(ftp_req arg, struct svc_req *rqstp)
 
         file_struct = (ftp_file *) malloc(sizeof(ftp_file));
         
-        if (bytes > 0 && bytes <= CHUNCK_SIZE)
+        if (bytes > 0 && bytes <= CHUNK_SIZE)
         {
                 file_struct->data.data_val = (char *) malloc(bytes);
         }
         else
         {
-                file_struct->data.data_val = (char *) malloc(sizeof(char) * CHUNCK_SIZE);
-                bytes = CHUNCK_SIZE;
+                file_struct->data.data_val = (char *) malloc(sizeof(char) * CHUNK_SIZE);
+                bytes = CHUNK_SIZE;
         }
 
         file = fopen(path, "r");
