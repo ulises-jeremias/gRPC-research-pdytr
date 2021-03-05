@@ -6,6 +6,7 @@
 #include <inttypes.h>
 #include <libgen.h>
 #include <dirent.h>
+#include <sys/stat.h>
 
 #include <include/command.h>
 #include <include/util.h>
