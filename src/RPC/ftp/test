@@ -73,7 +73,7 @@ sleep 1
 log_success "Server running\n"
 
 # generate files for test (small with 1024 bytes and big with 200M)
-mkdir tests
+mkdir -p store tests/out
 fallocate -l 1024 ./tests/test_write_small.txt
 fallocate -l 200M ./tests/test_write_big.txt
 
