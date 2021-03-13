@@ -10,8 +10,8 @@ message ReadRequest {
 
 message WriteRequest {
     string name = 1;
-    string data = 3;
-    int64 checksum = 4;
+    string data = 2;
+    int64 checksum = 3;
 }
 
 message ListRequest {
