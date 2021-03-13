@@ -25,7 +25,7 @@ $ ./bin/grpc --app=<app> [--build] [--root]
 where,
 
 ```
-app = simp | ftp | user_lookup | ...
+<app> = simp | ftp | user_lookup | request_stream | response_stream | request_and_response_stream
 ```
 
 _NOTE: Execute `./bin/grpc -h` to know more about flags._
@@ -64,7 +64,7 @@ $ ./bin/rpc --app=<app> [--build] [--root]
 where,
 
 ```
-app = simp | ftp | user_lookup | ...
+<app> = simp | ftp | user_lookup | ...
 ```
 
 _NOTE: Execute `./bin/rpc -h` to know more about flags._
