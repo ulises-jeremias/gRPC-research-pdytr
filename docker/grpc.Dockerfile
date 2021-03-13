@@ -52,7 +52,7 @@ RUN locale-gen en_US.UTF-8
 ENV LC_CTYPE 'en_US.UTF-8'
 ENV LANG C.UTF-8
 
-ENV PATH=$PATH:$GOPATH/bin
+ENV PATH=$PATH:$(go env GOPATH)/bin
 
 COPY bashrc /etc/bash.bashrc
 RUN chmod a+rwx /etc/bash.bashrc
