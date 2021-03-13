@@ -37,7 +37,7 @@ _NOTA: Ejecutar `./bin/grpc -h` para conocer más sobre los flags._
 Esto ejecutará un contenedor docker en modo interactivo con un volumen en el directorio de la aplicación elegida.
 
 <p align="center">
-  <img src="./static/terminal.png">
+  <img src="../static/terminal.png">
 </p>
 
 #### Ejecución de los Ejemplos
