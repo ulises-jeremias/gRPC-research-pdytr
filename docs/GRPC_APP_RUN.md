@@ -2,15 +2,6 @@
 
 Existen dos formas de ejecutar cada una de las aplicaciones cliente/servidor gRPC que se encuentran en este [repositorio](https://github.com/ulises-jeremias/gRPC-research-pdytr).
 
-- [Ejecución de las aplicaciones](#ejecución-de-las-aplicaciones)
-  - [Utilizando Docker (Recomendado)](#utilizando-docker-recomendado)
-    - [Dependencias](#dependencias)
-    - [Ejecución del Ambiente](#ejecución-del-ambiente)
-    - [Ejecución de las Aplicaciones](#ejecución-de-las-aplicaciones-1)
-  - [Ejecución en Ambiente Local](#ejecución-en-ambiente-local)
-    - [Dependencias](#dependencias-1)
-    - [Ejecución de las Aplicaciones](#ejecución-de-las-aplicaciones-2)
-
 ## Utilizando Docker (Recomendado)
 
 Para esto creamos un setup basado en Docker para la ejecución de las distintas aplicaciones.
@@ -39,7 +30,7 @@ _NOTA: Ejecutar `./bin/grpc -h` para conocer más sobre los flags._
 Esto ejecutará un contenedor docker en modo interactivo con un volumen en el directorio de la aplicación elegida.
 
 <p align="center">
-  <img src="../static/terminal.png">
+  <img src="https://raw.githubusercontent.com/ulises-jeremias/gRPC-research-pdytr/master/static/terminal.png">
 </p>
 
 ### Ejecución de las Aplicaciones
