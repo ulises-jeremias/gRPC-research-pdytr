@@ -7,7 +7,7 @@
   - [Ejecución en Ambiente Local](#ejecución-en-ambiente-local)
     - [Dependencias](#dependencias-1)
     - [Ejecución de las Aplicaciones](#ejecución-de-las-aplicaciones-2)
-- [Implementación de Cliente/Servidor FTP con gRPC](./GRPC_APP_IMPL.md)
+- [Tutorial Básico](./GRPC_APP_IMPL.md)
   - [Diseño](#diseño)
     - [Read](#read)
     - [Write](#write)

@@ -1,5 +1,3 @@
-# Ejecución de las aplicaciones
-
 Existen dos formas de ejecutar cada una de las aplicaciones cliente/servidor gRPC que se encuentran en este [repositorio](https://github.com/ulises-jeremias/gRPC-research-pdytr).
 
 ## Utilizando Docker (Recomendado)
