@@ -1,5 +1,5 @@
 
-- [Ejecución de las aplicaciones](./GRPC_APP_RUN.md)
+- [Ejecución de las Aplicaciones](./GRPC_APP_RUN.md)
   - [Utilizando Docker (Recomendado)](#utilizando-docker-recomendado)
     - [Dependencias](#dependencias)
     - [Ejecución del Ambiente](#ejecución-del-ambiente)
@@ -7,7 +7,7 @@
   - [Ejecución en Ambiente Local](#ejecución-en-ambiente-local)
     - [Dependencias](#dependencias-1)
     - [Ejecución de las Aplicaciones](#ejecución-de-las-aplicaciones-2)
-- [Tutorial Básico](./GRPC_APP_IMPL.md)
+- [Tutorial Básico - FTP](./GRPC_APP_IMPL.md)
   - [Diseño](#diseño)
     - [Read](#read)
     - [Write](#write)
