@@ -766,7 +766,7 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
 $ go get -u google.golang.org/grpc
 $ go get -u github.com/golang/protobuf/protoc-gen-go</pre></li>
 <li><p>Actualizar la variable <code>PATH</code> para que el compilador <code>protoc</code> pueda encontrar los plugins:</p>
-<pre class="hljs">$ <span class="hljs-built_in">export</span> PATH=<span class="hljs-string">"<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$(go env GOPATH)</span>/bin"</span></pre></li>
+<pre class="hljs">$ <span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:<span class="hljs-subst">$(go env GOPATH)</span>/bin&quot;</span></pre></li>
 </ul>
 <h3 id="ejecuci-n-de-las-aplicaciones">Ejecución de las Aplicaciones</h3>
 <p>Una vez instaladas las dependencias, podemos proceder a ejecutar las aplicaciones. Para esto se debe seguir el siguiente ejemplo de comandos. Todas tienen exactamente el mismo esquema de ejecución:</p>
@@ -817,7 +817,7 @@ $ go run ./client/main.go</pre><p>donde,</p>
 </ol>
 <p>Como se puede notar de esta secuencia, la misma resulta en una interacción en la cual el cliente solicita el recurso una única vez al inicio y el servidor envía porciones del mismo hasta que todos los chuncks sean leidos correctamente o exista algún error. Teniendo en cuenta que la cantidad de interacciones varía según el tamaño del archivo y tamaño de cada chunck es que pensamos que sería interesante y óptimo utilizar algún modelo de streaming, y particularmente para este caso, utilizar el modelo <strong>Server Side Streaming</strong> para la definición de esta operación.</p>
 <p>Para todo esto definimos dos tipos de mensajes: <code>ReadRequest</code> y <code>ReadResponse</code> con los datos necesarios, y el servicio <code>Read</code> de la siguiente forma:</p>
-<pre class="hljs">syntax = <span class="hljs-string">"proto3"</span>;
+<pre class="hljs">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;
 
 <span class="hljs-keyword">package</span> ftp;
 
@@ -847,7 +847,7 @@ $ go run ./client/main.go</pre><p>donde,</p>
 </ol>
 <p>A deferencia del caso anterior, la operación se define como un proceso en el cual el cliente envia de forma continua datos a escribir en el servidor y recibe un resumen del total de operaciones en caso de haber un error. Teniendo en cuenta que la cantidad de interacciones varía según el tamaño del archivo y tamaño de cada chunck es que pensamos que sería interesante y óptimo utilizar un modelo de stream, pero a diferencia del caso anterior, este será un modelo de <strong>Client Side Streaming</strong>.</p>
 <p>Para todo esto definimos dos tipos de mensajes: <code>WriteRequest</code> y <code>WriteResponse</code> con los datos necesarios, y el servicio <code>Write</code> de la siguiente forma:</p>
-<pre class="hljs">syntax = <span class="hljs-string">"proto3"</span>;
+<pre class="hljs">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;
 
 <span class="hljs-keyword">package</span> ftp;
 
@@ -865,7 +865,7 @@ $ go run ./client/main.go</pre><p>donde,</p>
 <p>Esta operación cuenta con una forma distinta de trabajo a las definidas anteriormente. En este caso el cliente solicita el listado de archivos al servidor. Este último devuelve un único string que contiene el nombre de los archivos, o error en caso de existir.</p>
 <p>En este caso la interacción es única, por lo que esta operación se define utilizando el modelo <strong>Simple RPC</strong>.</p>
 <p>Para todo esto definimos dos tipos de mensajes: <code>ListRequest</code> y <code>ListResponse</code> con los datos necesarios, y el servicio <code>List</code> de la siguiente forma:</p>
-<pre class="hljs">syntax = <span class="hljs-string">"proto3"</span>;
+<pre class="hljs">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;
 
 <span class="hljs-keyword">package</span> ftp;
 
@@ -883,7 +883,7 @@ $ go run ./client/main.go</pre><p>donde,</p>
 }</pre><h3 id="definici-n-del-servicio">Definición del Servicio</h3>
 <p>El primer paso es el de definir el servicio y tipos de los mensajes de <em>request</em> y <em>response</em> gRPC utilizando <em>protocol buffers</em>.
 Para esto definimos el archivo <code>ftp.proto</code> con el siguiente contenido:</p>
-<pre class="hljs">syntax = <span class="hljs-string">"proto3"</span>;
+<pre class="hljs">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;
 
 <span class="hljs-keyword">package</span> ftp;
 
@@ -935,10 +935,10 @@ Para esto definimos el archivo <code>ftp.proto</code> con el siguiente contenido
 <pre class="hljs"><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
-    <span class="hljs-string">"context"</span>
+    <span class="hljs-string">&quot;context&quot;</span>
 
     <span class="hljs-comment">// módulo definido en el archivo ftp.pb.go</span>
-    ftp <span class="hljs-string">".."</span>
+    ftp <span class="hljs-string">&quot;..&quot;</span>
 
     . . .
 )
@@ -962,21 +962,21 @@ Para esto definimos el archivo <code>ftp.proto</code> con el siguiente contenido
 <pre class="hljs"><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
-    <span class="hljs-string">"context"</span>
+    <span class="hljs-string">&quot;context&quot;</span>
 
     <span class="hljs-comment">// módulo definido en el archivo ftp.pb.go</span>
-    ftp <span class="hljs-string">".."</span>
+    ftp <span class="hljs-string">&quot;..&quot;</span>
 
-    <span class="hljs-string">"net"</span>
+    <span class="hljs-string">&quot;net&quot;</span>
 
-    <span class="hljs-string">"google.golang.org/grpc"</span>
-    <span class="hljs-string">"google.golang.org/grpc/reflection"</span>
+    <span class="hljs-string">&quot;google.golang.org/grpc&quot;</span>
+    <span class="hljs-string">&quot;google.golang.org/grpc/reflection&quot;</span>
 )
 
 <span class="hljs-keyword">type</span> server <span class="hljs-keyword">struct</span>{}
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
-    listener, err := net.Listen(<span class="hljs-string">"tcp"</span>, <span class="hljs-string">":4444"</span>)
+    listener, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;:4444&quot;</span>)
     <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
         <span class="hljs-built_in">panic</span>(err)
     }
@@ -1006,16 +1006,16 @@ Para esto definimos el archivo <code>ftp.proto</code> con el siguiente contenido
 <pre class="hljs"><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
-    <span class="hljs-string">"context"</span>
+    <span class="hljs-string">&quot;context&quot;</span>
 
     <span class="hljs-comment">// módulo definido en el archivo ftp.pb.go</span>
-    ftp <span class="hljs-string">".."</span>
+    ftp <span class="hljs-string">&quot;..&quot;</span>
 
-    <span class="hljs-string">"google.golang.org/grpc"</span>
+    <span class="hljs-string">&quot;google.golang.org/grpc&quot;</span>
 )
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
-    conn, err := grpc.Dial(<span class="hljs-string">"localhost:4444"</span>, grpc.WithInsecure())
+    conn, err := grpc.Dial(<span class="hljs-string">&quot;localhost:4444&quot;</span>, grpc.WithInsecure())
     <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
         <span class="hljs-built_in">panic</span>(err)
     }
@@ -1025,7 +1025,7 @@ Para esto definimos el archivo <code>ftp.proto</code> con el siguiente contenido
 <h4 id="read-server-side-stream-">Read (Server Side Stream)</h4>
 <pre class="hljs"><span class="hljs-comment">// send request</span>
 req := ftp.ReadRequest{
-    Name:  <span class="hljs-string">". . ."</span>,
+    Name:  <span class="hljs-string">&quot;. . .&quot;</span>,
     Pos:   <span class="hljs-number">0</span>,
     Bytes: <span class="hljs-number">4096</span>,
 }
@@ -1034,7 +1034,7 @@ req := ftp.ReadRequest{
 stream, err := client.Read(context.Background(), &amp;req)
 done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatalf(<span class="hljs-string">"open stream error %v"</span>, err)
+    log.Fatalf(<span class="hljs-string">&quot;open stream error %v&quot;</span>, err)
 }
 
 <span class="hljs-keyword">for</span> {
@@ -1044,7 +1044,7 @@ done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan<
         <span class="hljs-keyword">break</span>
     }
     <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-        log.Fatalf(<span class="hljs-string">"can not receive %v"</span>, err)
+        log.Fatalf(<span class="hljs-string">&quot;can not receive %v&quot;</span>, err)
     }
 
     <span class="hljs-comment">// do something with data</span>
@@ -1057,12 +1057,12 @@ done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan<
 stream, err := client.Write(context.Background())
 done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatalf(<span class="hljs-string">"open stream error %v"</span>, err)
+    log.Fatalf(<span class="hljs-string">&quot;open stream error %v&quot;</span>, err)
 }
 
 <span class="hljs-keyword">for</span> {
     <span class="hljs-comment">// save buffer data</span>
-    dataVal := <span class="hljs-string">". . ."</span>
+    dataVal := <span class="hljs-string">&quot;. . .&quot;</span>
 
     <span class="hljs-keyword">if</span> (someCondition) {
         <span class="hljs-keyword">break</span>;
@@ -1070,12 +1070,12 @@ done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan<
 
     <span class="hljs-comment">// send request</span>
     req := ftp.WriteRequest{
-        Name:     <span class="hljs-string">". . ."</span>,
+        Name:     <span class="hljs-string">&quot;. . .&quot;</span>,
         Data:     dataVal,
         Checksum: checksum(buf),
     }
     <span class="hljs-keyword">if</span> err := stream.Send(&amp;req); err != <span class="hljs-literal">nil</span> {
-        log.Fatalf(<span class="hljs-string">"can not send %v"</span>, err)
+        log.Fatalf(<span class="hljs-string">&quot;can not send %v&quot;</span>, err)
     }
 }
 
@@ -1085,15 +1085,15 @@ _, err = stream.CloseAndRecv()
     <span class="hljs-built_in">close</span>(done)
 }
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatalf(<span class="hljs-string">"can not receive %v"</span>, err)
+    log.Fatalf(<span class="hljs-string">&quot;can not receive %v&quot;</span>, err)
 }</pre><h4 id="list-simple-rpc-">List (Simple RPC)</h4>
-<pre class="hljs">req := &amp;ftp.ListRequest{Name: <span class="hljs-string">". . ."</span>, List: <span class="hljs-literal">true</span>}
+<pre class="hljs">req := &amp;ftp.ListRequest{Name: <span class="hljs-string">&quot;. . .&quot;</span>, List: <span class="hljs-literal">true</span>}
 
 res, err := client.List(context.Background(), req)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatalf(<span class="hljs-string">"Error when calling Add: %s"</span>, err)
+    log.Fatalf(<span class="hljs-string">&quot;Error when calling Add: %s&quot;</span>, err)
 }
-log.Printf(<span class="hljs-string">"%s"</span>, res.Paths)</pre>
+log.Printf(<span class="hljs-string">&quot;%s&quot;</span>, res.Paths)</pre>
         </div> <!-- /div.col-md-9 -->
       </div> <!-- /div.row -->
     </div> <!-- /div.container -->
