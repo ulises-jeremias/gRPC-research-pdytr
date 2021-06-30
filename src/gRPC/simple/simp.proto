@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package simple;
 
-option go_package = "simple";
+option go_package = ".;simple";
 
 message Request {
     int64 a = 1;

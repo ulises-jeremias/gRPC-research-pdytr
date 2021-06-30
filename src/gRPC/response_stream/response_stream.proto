@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package response_stream;
 
-option go_package = "response_stream";
+option go_package = ".;response_stream";
 
 message Request {
     int64 num = 1;
