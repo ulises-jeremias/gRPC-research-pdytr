@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package user_lookup;
 
+option go_package = "./";
 
 message Username {
     string name = 1;
