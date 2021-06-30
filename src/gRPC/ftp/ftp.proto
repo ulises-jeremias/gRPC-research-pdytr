@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package ftp;
 
-option go_package = "./";
+option go_package = "ftp";
 
 message ReadRequest {
     string name = 1;
