@@ -30,6 +30,9 @@ RUN useradd -m ${USER} \
     && usermod -a -G sudo ${USER} \
     && rm -rf /home/${USER}/.bashrc
 
+# Set go env default settings
+RUN go env -w GO111MODULE=auto
+
 # Install grpc
 RUN go get -u google.golang.org/grpc \
     && go get -u github.com/golang/protobuf/protoc-gen-go
