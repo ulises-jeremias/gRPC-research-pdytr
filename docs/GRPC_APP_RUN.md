@@ -68,16 +68,20 @@ A continuación se muestran las dependencias necesarias para ejecutar las aplica
   
   Para obtener instrucciones de instalación, consulte la [guía de introducción](https://golang.org/doc/install) de Go.
 
+  _NOTA: Esta guía funciona con la versión 1.16.5 que es la última hasta la fecha_
+
 - Compilador de búfer de protocolo, `protoc`, versión 3.
 
   Para obtener instrucciones de instalación, consulte [Instalación del compilador](https://grpc.io/docs/protoc-installation/) de protocol buffer.
+
+  _NOTA: Esta guía funciona con la versión 3.15.8 que es la última hasta la fecha_
 
 - GO Plugins para el compilador `protoc`:
 
   Instale los complementos del compilador `protoc` para GO con los siguientes comandos:
 
   ```sh
-  $ export GO111MODULE=on  # Enable module mode
+  $ go env -w GO111MODULE=auto # enable module mode
   $ go get -u google.golang.org/grpc
   $ go get -u github.com/golang/protobuf/protoc-gen-go
   ```

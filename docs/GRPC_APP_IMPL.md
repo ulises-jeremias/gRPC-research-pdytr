@@ -47,6 +47,8 @@ syntax = "proto3";
 
 package ftp;
 
+option go_package = ".;ftp";
+
 message ReadRequest {
     string name = 1;
     int64 pos = 2;
@@ -83,6 +85,8 @@ syntax = "proto3";
 
 package ftp;
 
+option go_package = ".;ftp";
+
 message WriteRequest {
     string name = 1;
     string data = 2;
@@ -109,6 +113,8 @@ syntax = "proto3";
 
 package ftp;
 
+option go_package = ".;ftp";
+
 message ListRequest {
     string name = 1;
     bool list = 2;
@@ -132,6 +138,8 @@ Para esto definimos el archivo `ftp.proto` con el siguiente contenido:
 syntax = "proto3";
 
 package ftp;
+
+option go_package = ".;ftp";
 
 message ReadRequest {
     string name = 1;
