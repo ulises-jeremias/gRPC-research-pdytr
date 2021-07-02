@@ -756,13 +756,15 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
 <ul>
 <li><p><a href="https://golang.org/">GO</a>, cualquiera de las tres últimas <a href="https://golang.org/doc/devel/release.html">versiones principales de GO</a>.</p>
 <p>Para obtener instrucciones de instalación, consulte la <a href="https://golang.org/doc/install">guía de introducción</a> de Go.</p>
+<p><em>NOTA: Esta guía funciona con la versión 1.16.5 que es la última hasta la fecha</em></p>
 </li>
 <li><p>Compilador de búfer de protocolo, <code>protoc</code>, versión 3.</p>
 <p>Para obtener instrucciones de instalación, consulte <a href="https://grpc.io/docs/protoc-installation/">Instalación del compilador</a> de protocol buffer.</p>
+<p><em>NOTA: Esta guía funciona con la versión 3.15.8 que es la última hasta la fecha</em></p>
 </li>
 <li><p>GO Plugins para el compilador <code>protoc</code>:</p>
 <p>Instale los complementos del compilador <code>protoc</code> para GO con los siguientes comandos:</p>
-<pre class="hljs">$ <span class="hljs-built_in">export</span> GO111MODULE=on  <span class="hljs-comment"># Enable module mode</span>
+<pre class="hljs">$ go env -w GO111MODULE=auto <span class="hljs-comment"># enable module mode</span>
 $ go get -u google.golang.org/grpc
 $ go get -u github.com/golang/protobuf/protoc-gen-go</pre></li>
 <li><p>Actualizar la variable <code>PATH</code> para que el compilador <code>protoc</code> pueda encontrar los plugins:</p>
@@ -821,6 +823,8 @@ $ go run ./client/main.go</pre><p>donde,</p>
 
 <span class="hljs-keyword">package</span> ftp;
 
+<span class="hljs-keyword">option</span> go_package = <span class="hljs-string">&quot;.;ftp&quot;</span>;
+
 <span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">ReadRequest</span> </span>{
     <span class="hljs-built_in">string</span> name = <span class="hljs-number">1</span>;
     <span class="hljs-built_in">int64</span> pos = <span class="hljs-number">2</span>;
@@ -851,6 +855,8 @@ $ go run ./client/main.go</pre><p>donde,</p>
 
 <span class="hljs-keyword">package</span> ftp;
 
+<span class="hljs-keyword">option</span> go_package = <span class="hljs-string">&quot;.;ftp&quot;</span>;
+
 <span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">WriteRequest</span> </span>{
     <span class="hljs-built_in">string</span> name = <span class="hljs-number">1</span>;
     <span class="hljs-built_in">string</span> data = <span class="hljs-number">2</span>;
@@ -869,6 +875,8 @@ $ go run ./client/main.go</pre><p>donde,</p>
 
 <span class="hljs-keyword">package</span> ftp;
 
+<span class="hljs-keyword">option</span> go_package = <span class="hljs-string">&quot;.;ftp&quot;</span>;
+
 <span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">ListRequest</span> </span>{
     <span class="hljs-built_in">string</span> name = <span class="hljs-number">1</span>;
     <span class="hljs-built_in">bool</span> list = <span class="hljs-number">2</span>;
@@ -886,6 +894,8 @@ Para esto definimos el archivo <code>ftp.proto</code> con el siguiente contenido
 <pre class="hljs">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;
 
 <span class="hljs-keyword">package</span> ftp;
+
+<span class="hljs-keyword">option</span> go_package = <span class="hljs-string">&quot;.;ftp&quot;</span>;
 
 <span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">ReadRequest</span> </span>{
     <span class="hljs-built_in">string</span> name = <span class="hljs-number">1</span>;
